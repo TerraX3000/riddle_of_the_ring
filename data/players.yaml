@@ -1,0 +1,21 @@
+- id: 1
+  name: P1
+  character: Merry
+  current_turn: True
+  cards: []
+- id: 2
+  name: P2
+  character: Black Rider 1
+  current_turn: False
+  cards: []
+- id: 3
+  name: P3
+  character: Frodo
+  current_turn: False
+  cards: []
+- id: 4
+  name: P4
+  character: Black Rider 4
+  current_turn: False
+  cards: []
+    

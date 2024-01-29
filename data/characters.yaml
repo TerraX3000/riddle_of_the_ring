@@ -1,0 +1,24 @@
+Frodo:
+  color: yellow
+  side: good
+Sam:
+  color: green
+  side: good
+Merry:
+  color: blue
+  side: good
+Pippin:
+  color: violet
+  side: good
+Black Rider 1:
+  color: red
+  side: evil
+Black Rider 2:
+  color: black
+  side: evil
+Black Rider 3:
+  color: black
+  side: evil
+Black Rider 4:
+  color: orange
+  side: evil

@@ -1,0 +1,80 @@
+- id: 1
+  name: Riddle
+  image: 2_of_clubs
+- id: 2
+  name: Good Army
+  image: 2_of_diamonds
+- id: 3
+  name: Palantir
+  image: 2_of_hearts
+- id: 4
+  name: Spy
+  image: 2_of_spades
+- id: 5
+  name: Black Rider 3
+  image: 3_of_clubs
+- id: 6
+  name: Gollum
+  image: 3_of_diamonds
+- id: 7
+  name: The Ring
+  image: 3_of_hearts
+- id: 8
+  name: Flying Beast
+  image: 3_of_spades
+- id: 9
+  name: Shelob
+  image: 5_of_hearts
+- id: 10
+  name: Butterbur
+  image: 6_of_hearts
+- id: 11
+  name: Horse
+  image: 7_of_hearts
+- id: 12
+  name: Cloak
+  image: 8_of_hearts
+- id: 13
+  name: Boat
+  image: 9_of_hearts
+- id: 14
+  name: Riddle
+  image: 2_of_clubs
+- id: 15
+  name: Aragorn
+  image: 2_of_diamonds
+- id: 16
+  name: Legolas
+  image: 2_of_hearts
+- id: 17
+  name: Wormtongue
+  image: 2_of_spades
+- id: 18
+  name: Mouth of Sauron
+  image: 3_of_clubs
+- id: 19
+  name: Bilbo
+  image: 3_of_diamonds
+- id: 20
+  name: Treebeard
+  image: 3_of_hearts
+- id: 21
+  name: Galadriel
+  image: 3_of_spades
+- id: 22
+  name: Horse
+  image: 5_of_hearts
+- id: 23
+  name: Butterbur
+  image: 6_of_hearts
+- id: 24
+  name: Good City Battlepoint
+  image: queen_of_diamonds
+  type: City Battlepoint
+  include_in_draw_pile: False
+- id: 25
+  name: Evil City Battlepoint
+  image: queen_of_spades
+  type: City Battlepoint
+  include_in_draw_pile: False
+
