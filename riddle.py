@@ -40,6 +40,8 @@ if "is_initialized" not in st.session_state:
     initialize_game_data(category="draw_pile", data=get_shuffled_deck())
     initialize_game_data(category="discards", data=[])
 
+st.header("Riddle of the Ring")
+
 col_1, col_2, col_3 = st.columns([0.1, 0.5, 0.4])
 
 with col_1:
