@@ -2,7 +2,7 @@ modules:
   - index
   - play
   - info
-  - start_new_game
+  - start_or_join_game
   - resume_game
   - exit_game
   
