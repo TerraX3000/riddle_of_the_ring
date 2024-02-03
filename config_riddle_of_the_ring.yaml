@@ -1,5 +1,7 @@
 modules:
   - index
   - play
+  - info
+  - start_new_game
   
 

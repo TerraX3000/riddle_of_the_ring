@@ -8,7 +8,6 @@ st.set_page_config(
 )
 
 module_names = get_app_config(config_name="modules")
-print(module_names)
 try:
     module_name = st.query_params["page"]
 except:

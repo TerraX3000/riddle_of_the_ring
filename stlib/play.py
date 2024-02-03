@@ -1,5 +1,6 @@
 import streamlit as st
 from sections import (
+    navbar,
     player_section,
     cards_section,
     action_section,
@@ -16,6 +17,8 @@ from functions.utility import (
 
 
 def run():
+    st.query_params.page = "play"
+    navbar.run()
     style = """<style>h2,h3,h4,h5,h6 {text-align: center;}</style>"""
     st.markdown(style, unsafe_allow_html=True)
 
