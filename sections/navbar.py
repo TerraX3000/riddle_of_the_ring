@@ -6,7 +6,7 @@ def run():
     query_params = st.query_params.to_dict()
     ic(query_params)
     nav_1, nav_2, nav_3, nav_4, spacer, nav_game_info, nav_player_info = st.columns(
-        [1.5, 1.5, 1.5, 1.5, 3, 1.5, 1.5]
+        [1.5, 1.5, 1.5, 1.5, 2, 2, 2]
     )
     with nav_1:
         if st.button("Home", use_container_width=True):
