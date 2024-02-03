@@ -3,5 +3,7 @@ modules:
   - play
   - info
   - start_new_game
+  - resume_game
+  - exit_game
   
 
