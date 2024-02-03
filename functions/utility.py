@@ -1,11 +1,25 @@
 import streamlit as st
-from typing import Tuple
+from typing import Tuple, Dict, List, Union
 from icecream import ic
 import yaml
 import json
 from models import Player
 from functions import redis_functions
 import random
+
+
+def read_yaml(file_path) -> Union[Dict, List]:
+    """Read the specified file and return as a dictionary or list."""
+    with open(file_path, "r") as f:
+        return yaml.safe_load(f)
+
+
+def get_app_config(config_name=None):
+    path = "config_riddle_of_the_ring.yaml"
+    app_config = read_yaml(path)
+    if config_name:
+        return app_config[config_name]
+    return app_config
 
 
 def initialize_game_data(data=None, *, category: str):
