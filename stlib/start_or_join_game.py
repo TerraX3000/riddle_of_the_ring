@@ -32,6 +32,7 @@ def initialize_game(game_code, player_code, character):
             "cards": [],
             "selected_cards": [],
             "player_code": player_code,
+            "positions": [],
         }
         players[player_code] = player
         initialize_game_data(category="players", game_code=game_code, data=players)
@@ -42,8 +43,6 @@ def initialize_game(game_code, player_code, character):
         initialize_game_data(category="discards", game_code=game_code, data=[])
         battle = {"attacker_cards": [], "defender_cards": []}
         initialize_game_data(category="battle", data=battle, game_code=game_code)
-        points = []
-        initialize_game_data(category="points", data=points, game_code=game_code)
 
         print("+++++ Session initialization complete +++++++")
 
@@ -67,6 +66,7 @@ def initialize_player(game_code, player_code, character):
         "cards": [],
         "selected_cards": [],
         "player_code": player_code,
+        "positions": [],
     }
     players[player_code] = player
     set_data(category="players", data=players, game_code=game_code)
