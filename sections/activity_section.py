@@ -7,8 +7,7 @@ def run():
     game_code = st.query_params.game
     with st.container(height=1000):
         activities = get_data("activities", game_code=game_code)
-        for activity in reversed(activities):
-            activity_markdown = (
-                f"""### {activity["player"]["character"]} | {activity["action"]}"""
-            )
+        num_activities = len(activities)
+        for index, activity in enumerate(reversed(activities)):
+            activity_markdown = f"""#### {num_activities - index} | {activity["player"]["character"]} | {activity["action"]}"""
             st.markdown(activity_markdown)

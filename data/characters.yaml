@@ -1,24 +1,40 @@
 Frodo:
   color: yellow
   side: good
+  marker: white
+  marker_color_code: "#ffffff"
 Sam:
   color: green
   side: good
+  marker: green
+  marker_color_code: "#009933"
 Merry:
   color: blue
   side: good
+  marker: blue
+  marker_color_code: "#0066ff"
 Pippin:
   color: violet
   side: good
+  marker: yellow
+  marker_color_code: "#ffff00"
 Black Rider 1:
   color: red
   side: evil
+  marker: black
+  marker_color_code: "#000000"
 Black Rider 2:
   color: black
   side: evil
+  marker: red
+  marker_color_code: "#cc3300"
 Black Rider 3:
   color: black
   side: evil
+  marker: brown
+  marker_color_code: "#663300"
 Black Rider 4:
   color: orange
   side: evil
+  marker: grey
+  marker_color_code: "#999999"
