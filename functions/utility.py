@@ -307,6 +307,9 @@ def set_general_action():
         st.info("Show Hand to Player", icon="ℹ️")
     elif action == "Draw Card":
         draw_cards(1)
+    elif action == "Roll Die":
+        roll = random.randint(1, 6)
+        action += f": {roll}"
     st.session_state[f"general_action"] = None
     add_activity(action)
 

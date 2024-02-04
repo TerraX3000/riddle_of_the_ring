@@ -23,7 +23,7 @@ def run():
             index=None,
             key=f"general_action",
             options=[
-                "Roll Dice",
+                "Roll Die",
                 "Draw Card",
                 "Show Hand to Player",
                 "Attack from Good City",
