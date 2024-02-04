@@ -6,6 +6,8 @@ from functions.utility import (
     add_selected_card,
     is_card_selected_or_in_use,
 )
+from collections import OrderedDict
+from icecream import ic
 
 
 def run():
@@ -18,9 +20,12 @@ def run():
         permitted to see their cards (e.g., using a Spy to see their cards)."""
         st.title("Cards", help=help)
         players = get_data("players", game_code=game_code)
-        player_tabs = st.tabs([player["character"] for player in players.values()])
-        for player, player_tab in zip(players.values(), player_tabs):
-            print("player", player)
+        ordered_players = OrderedDict(players)
+        ordered_players.move_to_end(player_code, last=False)
+        player_tabs = st.tabs(
+            [player["character"] for player in ordered_players.values()]
+        )
+        for player, player_tab in zip(ordered_players.values(), player_tabs):
             is_my_cards = False
             if player["character"] == players[player_code]["character"]:
                 is_my_cards = True
