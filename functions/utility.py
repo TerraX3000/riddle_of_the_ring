@@ -214,7 +214,6 @@ def keep_card(card_id):
 
 def use_card_for_battle(card_id, battle_role):
     game_code = st.query_params.game
-    st.session_state[f"{battle_role}_cards"].append(card_id)
     battle = get_data("battle", game_code=game_code)
     battle[f"{battle_role}_cards"].append(card_id)
     set_data("battle", battle, game_code=game_code)
@@ -223,8 +222,6 @@ def use_card_for_battle(card_id, battle_role):
 
 def remove_battle_card(card_id, battle_role):
     game_code = st.query_params.game
-    if card_id in st.session_state[f"{battle_role}_cards"]:
-        st.session_state[f"{battle_role}_cards"].remove(card_id)
     battle = get_data("battle", game_code=game_code)
     if card_id in battle[f"{battle_role}_cards"]:
         battle[f"{battle_role}_cards"].remove(card_id)
@@ -239,8 +236,7 @@ def discard_battle_card(card_id, battle_role):
         battle[f"{battle_role}_cards"].remove(card_id)
         set_data("battle", battle, game_code=game_code)
     add_card_to_discard(card_id)
-    if card_id in st.session_state[f"{battle_role}_cards"]:
-        st.session_state[f"{battle_role}_cards"].remove(card_id)
+    return
 
 
 def retain_battle_card(card_id, battle_role):
@@ -249,8 +245,7 @@ def retain_battle_card(card_id, battle_role):
     if card_id in battle[f"{battle_role}_cards"]:
         battle[f"{battle_role}_cards"].remove(card_id)
         set_data("battle", battle, game_code=game_code)
-    if card_id in st.session_state[f"{battle_role}_cards"]:
-        st.session_state[f"{battle_role}_cards"].remove(card_id)
+    return
 
 
 def add_city_battle_card(battle_role, side):
@@ -298,8 +293,10 @@ def set_general_action():
 
 
 def show_battle_section():
+    game_code = st.query_params.game
+    battle = get_data("battle", game_code=game_code)
     battle_roles = ["attacker", "defender"]
     for battle_role in battle_roles:
-        if st.session_state[f"{battle_role}_cards"]:
+        if battle[f"{battle_role}_cards"]:
             return True
     return False

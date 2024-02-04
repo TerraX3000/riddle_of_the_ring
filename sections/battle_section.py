@@ -6,10 +6,14 @@ from functions.utility import (
     discard_battle_card,
     retain_battle_card,
 )
+from icecream import ic
 
 
 def run(battle_role):
     st.markdown(f"## {battle_role.title()}")
+    game_code = st.query_params.game
+    battle = get_data("battle", game_code=game_code)
+    ic(battle)
     battle_card_columns = st.columns(
         [
             1,
@@ -22,7 +26,7 @@ def run(battle_role):
     for (
         card_id,
         card_col,
-    ) in zip(st.session_state[f"{battle_role}_cards"], battle_card_columns):
+    ) in zip(battle[f"{battle_role}_cards"], battle_card_columns):
         with card_col:
             card = get_card(card_id)
             if card.get("type") == "City Battlepoint":
