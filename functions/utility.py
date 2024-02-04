@@ -293,7 +293,6 @@ def set_action(card_id):
 
 
 def set_general_action():
-    game_code = st.query_params.gameplayers = get_data("players", game_code=game_code)
     action = st.session_state[f"general_action"]
     print(action)
     if action == "Attack from Good City":
