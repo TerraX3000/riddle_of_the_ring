@@ -31,10 +31,14 @@ def initialize_game_data(data=None, game_code: str = None, *, category: str):
 
 def validate_game_data():
     """Validate game data is set and, if not, set it."""
-    keys = ["characters"]
-    for key in keys:
+    keys = ["characters", "games"]
+    game_datas = [{"key": "characters"}, {"key": "games", "data": []}]
+    for game_data in game_datas:
+        key = game_data.get("key")
+        data = game_data.get("data")
         if not redis_functions.data_exists(key):
-            initialize_game_data(category=key)
+            print(f"++++initializing game data | key={key}++++")
+            initialize_game_data(category=key, data=data)
     return
 
 
@@ -209,21 +213,42 @@ def keep_card(card_id):
 
 
 def use_card_for_battle(card_id, battle_role):
+    game_code = st.query_params.game
     st.session_state[f"{battle_role}_cards"].append(card_id)
+    battle = get_data("battle", game_code=game_code)
+    battle[f"{battle_role}_cards"].append(card_id)
+    set_data("battle", battle, game_code=game_code)
+    return
 
 
 def remove_battle_card(card_id, battle_role):
+    game_code = st.query_params.game
     if card_id in st.session_state[f"{battle_role}_cards"]:
         st.session_state[f"{battle_role}_cards"].remove(card_id)
+    battle = get_data("battle", game_code=game_code)
+    if card_id in battle[f"{battle_role}_cards"]:
+        battle[f"{battle_role}_cards"].remove(card_id)
+        set_data("battle", battle, game_code=game_code)
+    return
 
 
 def discard_battle_card(card_id, battle_role):
+    game_code = st.query_params.game
+    battle = get_data("battle", game_code=game_code)
+    if card_id in battle[f"{battle_role}_cards"]:
+        battle[f"{battle_role}_cards"].remove(card_id)
+        set_data("battle", battle, game_code=game_code)
     add_card_to_discard(card_id)
     if card_id in st.session_state[f"{battle_role}_cards"]:
         st.session_state[f"{battle_role}_cards"].remove(card_id)
 
 
 def retain_battle_card(card_id, battle_role):
+    game_code = st.query_params.game
+    battle = get_data("battle", game_code=game_code)
+    if card_id in battle[f"{battle_role}_cards"]:
+        battle[f"{battle_role}_cards"].remove(card_id)
+        set_data("battle", battle, game_code=game_code)
     if card_id in st.session_state[f"{battle_role}_cards"]:
         st.session_state[f"{battle_role}_cards"].remove(card_id)
 

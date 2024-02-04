@@ -3,6 +3,7 @@ from typing import Dict
 from config_redis import azure_redis
 import redis
 import pickle
+from icecream import ic
 
 
 def redis_check():
@@ -60,7 +61,8 @@ def data_exists(key, game_code=None) -> bool:
         key_prefix = "riddle:"
         if game_code:
             key_prefix += f"{game_code}:"
-        r.exists(key_prefix + key)
+        does_exist = r.exists(key_prefix + key)
+        return does_exist
     except Exception as e:
         print(f"Error checking if data exists in redis cache. {e}")
         return None

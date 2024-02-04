@@ -2,6 +2,7 @@ import streamlit as st
 from sections import navbar
 from icecream import ic
 from functions import redis_functions
+from functions.utility import get_data, set_data
 
 
 def run():
@@ -12,9 +13,24 @@ def run():
     st.write("Are you sure you want to exit the game?")
     if st.button("Yes - Delete All My Player Info"):
         st.query_params.clear()
-        keys = ["players", "activities", "draw_pile", "discards", "characters"]
+        keys = [
+            "players",
+            "activities",
+            "draw_pile",
+            "discards",
+            "characters",
+            "battle",
+            "points",
+        ]
         for key in keys:
             redis_functions.delete_data(key, game_code=game_code)
+        games = get_data("games")
+        for game in games:
+            if game_code == game.get("game_code"):
+                games.remove(game)
+                break
+        set_data("games", games)
+
         st.session_state.clear()
         st.query_params.page = "index"
         st.rerun()
