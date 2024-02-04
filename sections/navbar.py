@@ -5,8 +5,8 @@ from icecream import ic
 def run():
     query_params = st.query_params.to_dict()
     ic(query_params)
-    nav_1, nav_2, nav_3, nav_4, spacer, nav_game_info, nav_player_info = st.columns(
-        [1.5, 1.5, 1.5, 1.5, 2, 2, 2]
+    nav_1, nav_2, nav_3, nav_4, nav_5, spacer, nav_game_info, nav_player_info = (
+        st.columns([1.5, 1.5, 1.5, 1.5, 1.5, 2, 2, 2])
     )
     with nav_1:
         if st.button("Home", use_container_width=True):
@@ -66,12 +66,20 @@ def run():
 
     if "player" in query_params and "game" in query_params:
         with nav_game_info:
+            help = "Share the Game Code with other players to join your game."
             st.subheader(
-                f"Game Code: {query_params['game']}",
+                f"_Game Code:_ &nbsp; :blue[{query_params['game']}]",
                 anchor=False,
+                help=help,
             )
         with nav_player_info:
+            help = "Remember your *secret* Player Code to restore your player settings in this game (e.g., if you accidentally close your browser).  No one else can see your Player Code."
             st.subheader(
-                f"Player Code: {query_params['player']}",
+                f"_Player Code:_ &nbsp; :blue[{query_params['player']}]",
                 anchor=False,
+                help=help,
             )
+    with nav_5:
+        if st.button("Admin", use_container_width=True):
+            st.query_params.page = "admin"
+            st.rerun()

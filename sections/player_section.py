@@ -1,12 +1,18 @@
 import streamlit as st
 from functions.utility import get_data
+from icecream import ic
 
 
 def run():
-    with st.container():
-        st.markdown("# Players")
+    query_params = st.query_params.to_dict()
+    game_code = query_params.get("game")
+    player_code = query_params.get("player")
+
+    with st.container(border=True):
+        st.title("Players")
         characters = get_data("characters")
-        players = get_data("players")
+        ic(characters)
+        players = get_data("players", game_code=game_code)
         for player in players:
             if player["character"] == st.session_state["player"]["character"]:
                 player_name = "me"

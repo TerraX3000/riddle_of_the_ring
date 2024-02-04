@@ -9,11 +9,13 @@ from functions.utility import (
     set_general_action,
     unselect_all_cards,
 )
+from icecream import ic
 
 
 def run():
-    st.markdown("# Actions")
-    with st.container():
+    with st.container(border=True):
+        help = "Select general actions"
+        st.title("Actions", help=help)
         st.selectbox(
             "Select Action",
             index=None,
@@ -30,8 +32,11 @@ def run():
             ],
             on_change=set_general_action,
         )
-    with st.container():
-        st.write("")
+    with st.container(border=True):
+        help = (
+            "Select cards from your hand and then choose actions for individual cards."
+        )
+        st.title("Selected Cards", help=help)
         for card_id in st.session_state["selected_cards"]:
             my_player_id = st.session_state["player"]["id"]
             my_cards = get_player_cards(player_id=my_player_id)
@@ -67,4 +72,11 @@ def run():
                     on_change=set_action,
                 )
         if st.session_state["selected_cards"]:
-            st.button("Unselect all cards", on_click=unselect_all_cards)
+
+            st.button(
+                "Unselect all cards",
+                on_click=unselect_all_cards,
+                use_container_width=True,
+            )
+        else:
+            st.markdown("*Select cards in your hand to perform card-specific actions*")

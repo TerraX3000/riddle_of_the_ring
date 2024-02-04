@@ -22,15 +22,24 @@ def get_app_config(config_name=None):
     return app_config
 
 
-def initialize_game_data(data=None, *, category: str):
+def initialize_game_data(data=None, game_code: str = None, *, category: str):
     if data is None:
         with open(f"data/{category}.yaml") as f:
             data = yaml.load(f, Loader=yaml.SafeLoader)
-    redis_functions.set_data(category, json.dumps(data))
+    redis_functions.set_data(category, json.dumps(data), game_code=game_code)
 
 
-def get_data(category: str):
-    data = redis_functions.get_data(category)
+def validate_game_data():
+    """Validate game data is set and, if not, set it."""
+    keys = ["characters"]
+    for key in keys:
+        if not redis_functions.data_exists(key):
+            initialize_game_data(category=key)
+    return
+
+
+def get_data(category: str, game_code=None):
+    data = redis_functions.get_data(category, game_code=game_code)
     # print("get_data", category, data)
     if data is not None:
         return json.loads(data)
@@ -40,12 +49,12 @@ def get_data(category: str):
     # return data
 
 
-def set_data(category: str, data):
-    redis_functions.set_data(category, json.dumps(data))
+def set_data(category: str, data, game_code=None):
+    redis_functions.set_data(category, json.dumps(data), game_code=game_code)
 
 
-def get_item(category: str, id: int):
-    items = get_data(category)
+def get_item(category: str, id: int, game_code=None):
+    items = get_data(category, game_code=game_code)
     for item in items:
         if item["id"] == id:
             return item
@@ -53,10 +62,11 @@ def get_item(category: str, id: int):
 
 
 def add_activity(player, action):
-    activities = get_data("activities")
+    game_code = st.query_params.game
+    activities = get_data("activities", game_code=game_code)
     activity = {"player": player, "action": action}
     activities.append(activity)
-    set_data("activities", activities)
+    set_data("activities", activities, game_code=game_code)
 
 
 @st.cache_data
@@ -69,7 +79,8 @@ def get_cards():
 
 
 def get_card_owner(card_id):
-    players = get_data("players")
+    game_code = st.query_params.game
+    players = get_data("players", game_code=game_code)
     for player in players:
         if card_id in player["cards"]:
             return player
@@ -94,14 +105,15 @@ def get_shuffled_deck():
     return cards
 
 
-def get_player_cards(player_id: str = None, character: str = None):
-    if player_id:
-        player = get_item("players", player_id)
+def get_player_cards(player_id: int = None, character: str = None):
+    game_code = st.query_params.game
+    if player_id is not None:
+        player = get_item("players", player_id, game_code=game_code)
         if player:
             return player["cards"]
         return None
     elif character:
-        players = get_data("players")
+        players = get_data("players", game_code=game_code)
         for player in players:
             if player["character"] == character:
                 return player["cards"]
@@ -150,39 +162,43 @@ def is_card_selected_or_in_use(card_id):
 
 
 def draw_cards(number=1):
-    draw_pile = get_data("draw_pile")
+    game_code = st.query_params.game
+    draw_pile = get_data("draw_pile", game_code=game_code)
     draw_cards = []
     for x in range(number):
         draw_cards.append(draw_pile.pop())
-    set_data("draw_pile", draw_pile)
+    set_data("draw_pile", draw_pile, game_code=game_code)
     this_player = st.session_state["player"]
-    players = get_data("players")
+    players = get_data("players", game_code=game_code)
     for player in players:
         if player["id"] == this_player["id"]:
             player["cards"].extend(draw_cards)
-    set_data("players", players)
+    set_data("players", players, game_code=game_code)
     return draw_cards
 
 
 def update_players(players):
-    set_data("players", players)
+    game_code = st.query_params.game
+    set_data("players", players, game_code=game_code)
 
 
 def remove_card_from_hand(card_id):
+    game_code = st.query_params.game
     this_player = st.session_state["player"]
-    players = get_data("players")
+    players = get_data("players", game_code=game_code)
     for player in players:
         if player["id"] == this_player["id"]:
             if card_id in player["cards"]:
                 player["cards"].remove(card_id)
-                set_data("players", players)
+                set_data("players", players, game_code=game_code)
 
 
 def add_card_to_discard(card_id):
+    game_code = st.query_params.game
     unselect_card(card_id)
-    discards = get_data("discards")
+    discards = get_data("discards", game_code=game_code)
     discards.append(card_id)
-    set_data("discards", discards)
+    set_data("discards", discards, game_code=game_code)
     remove_card_from_hand(card_id)
 
 

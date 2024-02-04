@@ -1,11 +1,17 @@
 import importlib
-from functions.utility import get_app_config
+from functions.utility import get_app_config, validate_game_data
 import streamlit as st
+import uuid
 
 st.set_page_config(
     page_title="Riddle of the Ring",
     layout="wide",
 )
+
+if "sid" not in st.session_state:
+    st.session_state.sid = str(uuid.uuid4())
+
+validate_game_data()
 
 module_names = get_app_config(config_name="modules")
 try:

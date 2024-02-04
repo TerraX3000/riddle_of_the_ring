@@ -9,9 +9,14 @@ from functions.utility import (
 
 
 def run():
-    with st.container():
-        st.markdown("# Cards")
-        players = get_data("players")
+    card_container = st.container(border=True)
+    game_code = st.query_params.game
+    with card_container:
+        help = """View your cards and select cards for card-specific actions.
+        Tabs show cards for other players which are hidden unless you are 
+        permitted to see their cards (e.g., using a Spy to see their cards)."""
+        st.title("Cards", help=help)
+        players = get_data("players", game_code=game_code)
         player_tabs = st.tabs([player["character"] for player in players])
         for player, player_tab in zip(players, player_tabs):
             print("player", player)
@@ -31,6 +36,11 @@ def run():
                             #     player["cards"] = sorted_cards
                             #     update_players(players)
                 card_row_1 = st.columns([1, 1, 1, 1, 1, 1, 1, 1, 1, 1])
+                if len(player_cards) > 10:
+                    st.divider()
+                    st.markdown(
+                        "*Just a friendly reminder: Over 10 Card Limit - Remember to Discard* :sunglasses:"
+                    )
                 card_row_2 = st.columns([1, 1, 1, 1, 1, 1, 1, 1, 1, 1])
                 for card_column, card_id in zip(card_row_1 + card_row_2, player_cards):
                     with card_column:

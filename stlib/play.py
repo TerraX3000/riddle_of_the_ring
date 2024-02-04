@@ -13,64 +13,52 @@ from functions.utility import (
     show_battle_section,
     initialize_game_data,
     get_shuffled_deck,
+    get_data,
 )
 
 
 def run():
     st.query_params.page = "play"
+    query_params = st.query_params.to_dict()
+    game_code = query_params.get("game")
+    player_code = query_params.get("player")
     navbar.run()
-    style = """<style>h2,h3,h4,h5,h6 {text-align: center;}</style>"""
-    st.markdown(style, unsafe_allow_html=True)
+    if not game_code or not player_code:
+        st.error(
+            "Game Code and Player Code are required to play.  Please start a new game or join an existing game."
+        )
+    else:
+        style = """<style>h2,h3,h4,h5,h6 {text-align: center;}</style>"""
+        st.markdown(style, unsafe_allow_html=True)
 
-    if "is_initialized" not in st.session_state:
-        print("+++++ Initializing session +++++++")
-        st.session_state["is_initialized"] = True
-        st.session_state["points"] = []
-        player = {}
-        player["id"] = 1
-        player["character"] = "Merry"
-        st.session_state["player"] = player
-        st.session_state["selected_cards"] = []
-        # st.session_state["in_use_cards"] = []
-        st.session_state["attacker_cards"] = []
-        st.session_state["defender_cards"] = []
-        initialize_game_data(category="players")
-        initialize_game_data(category="activities", data=[])
-        initialize_game_data(category="characters")
-        initialize_game_data(category="draw_pile", data=get_shuffled_deck())
-        initialize_game_data(category="discards", data=[])
+        col_1, col_2, col_3 = st.columns([0.1, 0.5, 0.4])
 
-    st.header("Riddle of the Ring")
-    st.write("Begin your journey")
+        with col_1:
+            player_section.run()
 
-    col_1, col_2, col_3 = st.columns([0.1, 0.5, 0.4])
+        with col_2:
+            cards_section.run()
 
-    with col_1:
-        player_section.run()
+        with col_3:
+            action_section.run()
 
-    with col_2:
-        cards_section.run()
+        if show_battle_section():
+            with st.container(border=True):
+                st.markdown("# Battle")
+                with st.container():
+                    col1, col2 = st.columns([1, 1])
+                    with col1:
+                        battle_section.run("attacker")
+                    with col2:
+                        battle_section.run("defender")
 
-    with col_3:
-        action_section.run()
+        col_4, col_5, col_6 = st.columns([1, 3, 1])
 
-    if show_battle_section():
-        with st.container():
-            st.markdown("# Battle")
-            with st.container():
-                col1, col2 = st.columns([1, 1])
-                with col1:
-                    battle_section.run("attacker")
-                with col2:
-                    battle_section.run("defender")
+        with col_4:
+            activity_section.run()
 
-    col_4, col_5, col_6 = st.columns([1, 3, 1])
+        with col_5:
+            board_section.run()
 
-    with col_4:
-        activity_section.run()
-
-    with col_5:
-        board_section.run()
-
-    with col_6:
-        discard_section.run()
+        with col_6:
+            discard_section.run()
