@@ -13,6 +13,8 @@ from icecream import ic
 
 
 def run():
+    game_code = st.query_params.game
+    player_code = st.query_params.player
     with st.container(border=True):
         help = "Select general actions"
         st.title("Actions", help=help)
@@ -37,9 +39,9 @@ def run():
             "Select cards from your hand and then choose actions for individual cards."
         )
         st.title("Selected Cards", help=help)
-        for card_id in st.session_state["selected_cards"]:
-            my_player_id = st.session_state["player"]["id"]
-            my_cards = get_player_cards(player_id=my_player_id)
+        players = get_data("players", game_code=game_code)
+        for card_id in players[player_code]["selected_cards"]:
+            my_cards = players[player_code]["cards"]
             with st.container():
                 col_1, col_2 = st.columns([1, 2])
                 if card_id in my_cards:
@@ -71,7 +73,7 @@ def run():
                     kwargs={"card_id": card_id},
                     on_change=set_action,
                 )
-        if st.session_state["selected_cards"]:
+        if players[player_code]["selected_cards"]:
 
             st.button(
                 "Unselect all cards",

@@ -65,8 +65,11 @@ def get_item(category: str, id: int, game_code=None):
     return None
 
 
-def add_activity(player, action):
+def add_activity(action):
     game_code = st.query_params.game
+    player_code = st.query_params.player
+    players = get_data("players", game_code=game_code)
+    player = players[player_code]
     activities = get_data("activities", game_code=game_code)
     activity = {"player": player, "action": action}
     activities.append(activity)
@@ -125,16 +128,31 @@ def get_player_cards(player_id: int = None, character: str = None):
 
 
 def add_selected_card(card_id):
-    st.session_state["selected_cards"].append(card_id)
+    game_code = st.query_params.game
+    player_code = st.query_params.player
+    players = get_data("players", game_code=game_code)
+    player = players[player_code]
+    ic(player)
+    # st.session_state["selected_cards"].append(card_id)
+    players[player_code]["selected_cards"].append(card_id)
+    set_data("players", players, game_code=game_code)
 
 
 def unselect_card(card_id):
-    if card_id in st.session_state["selected_cards"]:
-        st.session_state["selected_cards"].remove(card_id)
+    game_code = st.query_params.game
+    player_code = st.query_params.player
+    players = get_data("players", game_code=game_code)
+    if card_id in players[player_code]["selected_cards"]:
+        players[player_code]["selected_cards"].remove(card_id)
+        set_data("players", players, game_code=game_code)
+    return
 
 
 def unselect_all_cards():
-    selected_cards = st.session_state["selected_cards"].copy()
+    game_code = st.query_params.game
+    player_code = st.query_params.player
+    players = get_data("players", game_code=game_code)
+    selected_cards = players[player_code]["selected_cards"].copy()
     for card_id in selected_cards:
         unselect_card(card_id)
 
@@ -145,7 +163,10 @@ def unselect_all_cards():
 
 
 def is_card_selected(card_id):
-    if card_id in st.session_state["selected_cards"]:
+    game_code = st.query_params.game
+    player_code = st.query_params.player
+    players = get_data("players", game_code=game_code)
+    if card_id in players[player_code]["selected_cards"]:
         return True
     else:
         return False
@@ -167,16 +188,17 @@ def is_card_selected_or_in_use(card_id):
 
 def draw_cards(number=1):
     game_code = st.query_params.game
+    player_code = st.query_params.player
     draw_pile = get_data("draw_pile", game_code=game_code)
     draw_cards = []
     for x in range(number):
         draw_cards.append(draw_pile.pop())
     set_data("draw_pile", draw_pile, game_code=game_code)
-    this_player = st.session_state["player"]
     players = get_data("players", game_code=game_code)
-    for player in players:
-        if player["id"] == this_player["id"]:
-            player["cards"].extend(draw_cards)
+    players[player_code]["cards"].extend(draw_cards)
+    # for player in players:
+    #     if player["id"] == this_player["id"]:
+    #         player["cards"].extend(draw_cards)
     set_data("players", players, game_code=game_code)
     return draw_cards
 
@@ -188,13 +210,12 @@ def update_players(players):
 
 def remove_card_from_hand(card_id):
     game_code = st.query_params.game
-    this_player = st.session_state["player"]
+    player_code = st.query_params.player
     players = get_data("players", game_code=game_code)
-    for player in players:
-        if player["id"] == this_player["id"]:
-            if card_id in player["cards"]:
-                player["cards"].remove(card_id)
-                set_data("players", players, game_code=game_code)
+    if card_id in players[player_code]["cards"]:
+        players[player_code]["cards"].remove(card_id)
+        set_data("players", players, game_code=game_code)
+    return
 
 
 def add_card_to_discard(card_id):
@@ -268,11 +289,11 @@ def set_action(card_id):
     elif action == "Discard":
         add_card_to_discard(card_id)
     st.session_state[f"action_{card_id}"] = None
-    player = st.session_state["player"]
-    add_activity(player, f"{action} ({card['name']})")
+    add_activity(f"{action} ({card['name']})")
 
 
 def set_general_action():
+    game_code = st.query_params.gameplayers = get_data("players", game_code=game_code)
     action = st.session_state[f"general_action"]
     print(action)
     if action == "Attack from Good City":
@@ -288,8 +309,7 @@ def set_general_action():
     elif action == "Draw Card":
         draw_cards(1)
     st.session_state[f"general_action"] = None
-    player = st.session_state["player"]
-    add_activity(player, action)
+    add_activity(action)
 
 
 def show_battle_section():

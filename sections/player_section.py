@@ -7,14 +7,14 @@ def run():
     query_params = st.query_params.to_dict()
     game_code = query_params.get("game")
     player_code = query_params.get("player")
+    players = get_data("players", game_code=game_code)
 
     with st.container(border=True):
         st.title("Players")
         characters = get_data("characters")
-        ic(characters)
         players = get_data("players", game_code=game_code)
-        for player in players:
-            if player["character"] == st.session_state["player"]["character"]:
+        for player in players.values():
+            if player["character"] == players[player_code]["character"]:
                 player_name = "me"
             else:
                 player_name = player["name"]

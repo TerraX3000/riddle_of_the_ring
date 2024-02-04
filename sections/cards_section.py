@@ -11,17 +11,18 @@ from functions.utility import (
 def run():
     card_container = st.container(border=True)
     game_code = st.query_params.game
+    player_code = st.query_params.player
     with card_container:
         help = """View your cards and select cards for card-specific actions.
         Tabs show cards for other players which are hidden unless you are 
         permitted to see their cards (e.g., using a Spy to see their cards)."""
         st.title("Cards", help=help)
         players = get_data("players", game_code=game_code)
-        player_tabs = st.tabs([player["character"] for player in players])
-        for player, player_tab in zip(players, player_tabs):
+        player_tabs = st.tabs([player["character"] for player in players.values()])
+        for player, player_tab in zip(players.values(), player_tabs):
             print("player", player)
             is_my_cards = False
-            if player["character"] == st.session_state["player"]["character"]:
+            if player["character"] == players[player_code]["character"]:
                 is_my_cards = True
             with player_tab:
                 player_cards = player["cards"]

@@ -22,18 +22,9 @@ def initialize_game(game_code, player_code, character):
         print("+++++ Initializing session +++++++")
         st.session_state["is_initialized"] = True
         st.session_state["points"] = []
-        player = {}
-        player["id"] = 0
-        player["character"] = character
-        ic(player_code)
-        player["player_code"] = player_code
-        st.session_state["player"] = player
-        st.session_state["selected_cards"] = []
-        st.session_state["attacker_cards"] = []
-        st.session_state["defender_cards"] = []
 
-        players = []
-        this_player = {
+        players = {}
+        player = {
             "id": 0,
             "name": "P1",
             "character": character,
@@ -42,8 +33,7 @@ def initialize_game(game_code, player_code, character):
             "selected_cards": [],
             "player_code": player_code,
         }
-        players.append(this_player)
-        ic(players)
+        players[player_code] = player
         initialize_game_data(category="players", game_code=game_code, data=players)
         initialize_game_data(category="activities", game_code=game_code, data=[])
         initialize_game_data(
@@ -68,17 +58,8 @@ def initialize_player(game_code, player_code, character):
     st.session_state["is_initialized"] = True
     st.session_state["points"] = []
     players = get_data("players", game_code=game_code)
-    player = {}
-    player["id"] = len(players)
-    player["character"] = character
-    ic(player_code)
-    player["player_code"] = player_code
-    st.session_state["player"] = player
-    st.session_state["selected_cards"] = []
-    st.session_state["attacker_cards"] = []
-    st.session_state["defender_cards"] = []
 
-    this_player = {
+    player = {
         "id": len(players),
         "name": "P1",
         "character": character,
@@ -87,8 +68,7 @@ def initialize_player(game_code, player_code, character):
         "selected_cards": [],
         "player_code": player_code,
     }
-    players.append(this_player)
-    ic(players)
+    players[player_code] = player
     set_data(category="players", data=players, game_code=game_code)
 
 
