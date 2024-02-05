@@ -138,12 +138,22 @@ def add_selected_card(card_id):
     set_data("players", players, game_code=game_code)
 
 
-def unselect_card(card_id):
+def unselect_card(card_id, for_all_players: bool = None):
     game_code = st.query_params.game
     player_code = st.query_params.player
     players = get_data("players", game_code=game_code)
-    if card_id in players[player_code]["selected_cards"]:
-        players[player_code]["selected_cards"].remove(card_id)
+    is_updated = False
+    if for_all_players:
+        for player in players.values():
+            if card_id in player["selected_cards"]:
+                player["selected_cards"].remove(card_id)
+                is_updated = True
+
+    else:
+        if card_id in players[player_code]["selected_cards"]:
+            players[player_code]["selected_cards"].remove(card_id)
+            is_updated = True
+    if is_updated:
         set_data("players", players, game_code=game_code)
     return
 
@@ -231,7 +241,7 @@ def remove_card_from_hand(card_id, player_code=None):
 
 def add_card_to_discard(card_id):
     game_code = st.query_params.game
-    unselect_card(card_id)
+    unselect_card(card_id, for_all_players=True)
     discards = get_data("discards", game_code=game_code)
     discards.append(card_id)
     set_data("discards", discards, game_code=game_code)
