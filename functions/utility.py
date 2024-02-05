@@ -71,7 +71,7 @@ def add_activity(action):
     players = get_data("players", game_code=game_code)
     player = players[player_code]
     activities = get_data("activities", game_code=game_code)
-    activity = {"player": player, "action": action}
+    activity = {"player": {"character": player["character"]}, "action": action}
     activities.append(activity)
     set_data("activities", activities, game_code=game_code)
 
