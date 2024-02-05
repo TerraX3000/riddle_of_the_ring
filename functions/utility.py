@@ -88,7 +88,7 @@ def get_cards():
 def get_card_owner(card_id):
     game_code = st.query_params.game
     players = get_data("players", game_code=game_code)
-    for player in players:
+    for player in players.values():
         if card_id in player["cards"]:
             return player
     return None
@@ -208,9 +208,20 @@ def update_players(players):
     set_data("players", players, game_code=game_code)
 
 
-def remove_card_from_hand(card_id):
+def add_card_to_hand(card_id):
     game_code = st.query_params.game
     player_code = st.query_params.player
+    players = get_data("players", game_code=game_code)
+    if card_id not in players[player_code]["cards"]:
+        players[player_code]["cards"].append(card_id)
+        set_data("players", players, game_code=game_code)
+    return
+
+
+def remove_card_from_hand(card_id, player_code=None):
+    game_code = st.query_params.game
+    if player_code is None:
+        player_code = st.query_params.player
     players = get_data("players", game_code=game_code)
     if card_id in players[player_code]["cards"]:
         players[player_code]["cards"].remove(card_id)
@@ -277,9 +288,18 @@ def add_city_battle_card(battle_role, side):
     use_card_for_battle(card_id, battle_role)
 
 
+def transfer_card(card_id):
+    card_owner = get_card_owner(card_id)
+    remove_card_from_hand(card_id, card_owner["player_code"])
+    add_card_to_hand(card_id)
+    unselect_card(card_id)
+    return
+
+
 def set_action(card_id):
     card = get_card(card_id)
     action = st.session_state[f"action_{card_id}"]
+    st.session_state[f"action_{card_id}"] = None
     if action == "Unselect":
         unselect_card(card_id)
     elif action == "Use to Defend":
@@ -288,8 +308,13 @@ def set_action(card_id):
         use_card_for_battle(card_id, "attacker")
     elif action == "Discard":
         add_card_to_discard(card_id)
-    st.session_state[f"action_{card_id}"] = None
+    elif action == "Take for Friendly Exchange":
+        card_owner = get_card_owner(card_id)
+        transfer_card(card_id)
+        add_activity(f"{action} (from {card_owner['character']})")
+        return
     add_activity(f"{action} ({card['name']})")
+    return
 
 
 def set_general_action():
