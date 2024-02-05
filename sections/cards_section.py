@@ -5,6 +5,7 @@ from functions.utility import (
     get_card,
     add_selected_card,
     is_card_selected_or_in_use,
+    set_data,
 )
 from collections import OrderedDict
 from icecream import ic
@@ -27,10 +28,20 @@ def run():
         )
         for player, player_tab in zip(ordered_players.values(), player_tabs):
             is_my_cards = False
+            is_show_hand_to_character = False
             if player["character"] == players[player_code]["character"]:
                 is_my_cards = True
+            if (
+                player["special_actions"]["show_hand_to_character"]
+                == players[player_code]["character"]
+            ):
+                is_show_hand_to_character = True
+                player["special_actions"]["show_hand_to_character"] = None
+
             with player_tab:
                 player_cards = player["cards"]
+                if is_show_hand_to_character:
+                    st.info(f"{player['character']} is showing hand to you.")
                 if is_my_cards:
                     ...
                     if "sorted_cards" in st.session_state:
@@ -51,7 +62,7 @@ def run():
                 for card_column, card_id in zip(card_row_1 + card_row_2, player_cards):
                     with card_column:
                         card = get_card(card_id)
-                        if is_my_cards:
+                        if is_my_cards or is_show_hand_to_character:
                             card_image = card["image"]
                             card_name = f'{card["name"]} [{card_id}]'
                         else:
@@ -91,3 +102,4 @@ def run():
         # st.write(f"original_items: {original_items}")
         # st.write(f"sorted_items: {sorted_items}")
         # st.write(st.session_state["sort_key"])
+        set_data("players", players, game_code=game_code)

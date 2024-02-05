@@ -296,6 +296,19 @@ def transfer_card(card_id):
     return
 
 
+def show_hand_to_character():
+    character = st.session_state["show_hand_to_character"]
+    st.session_state.pop("show_hand_to_character")
+    game_code = st.query_params.game
+    player_code = st.query_params.player
+    players = get_data("players", game_code=game_code)
+    players[player_code]["special_actions"]["show_hand_to_character"] = character
+    set_data("players", players, game_code=game_code)
+    action = "Show Hand to Player"
+    add_activity(f"{action} ({character})")
+    return
+
+
 def set_action(card_id):
     card = get_card(card_id)
     action = st.session_state[f"action_{card_id}"]
@@ -319,7 +332,7 @@ def set_action(card_id):
 
 def set_general_action():
     action = st.session_state[f"general_action"]
-    print(action)
+    st.session_state[f"general_action"] = None
     if action == "Attack from Good City":
         add_city_battle_card("attacker", "good")
     elif action == "Attack from Evil City":
@@ -329,13 +342,13 @@ def set_general_action():
     elif action == "Defend from Evil City":
         add_city_battle_card("defender", "evil")
     elif action == "Show Hand to Player":
-        st.info("Show Hand to Player", icon="ℹ️")
+        st.session_state["show_hand_to_character"] = True
+        return
     elif action == "Draw Card":
         draw_cards(1)
     elif action == "Roll Die":
         roll = random.randint(1, 6)
         action += f": {roll}"
-    st.session_state[f"general_action"] = None
     add_activity(action)
 
 

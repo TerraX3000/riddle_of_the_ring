@@ -33,6 +33,7 @@ def initialize_game(game_code, player_code, character):
             "selected_cards": [],
             "player_code": player_code,
             "positions": [],
+            "special_actions": {"show_hand_to_character": None},
         }
         players[player_code] = player
         initialize_game_data(category="players", game_code=game_code, data=players)
@@ -67,6 +68,7 @@ def initialize_player(game_code, player_code, character):
         "selected_cards": [],
         "player_code": player_code,
         "positions": [],
+        "special_actions": {"show_hand_to_character": None},
     }
     players[player_code] = player
     set_data(category="players", data=players, game_code=game_code)

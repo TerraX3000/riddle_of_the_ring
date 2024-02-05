@@ -8,6 +8,8 @@ from functions.utility import (
     set_action,
     set_general_action,
     unselect_all_cards,
+    add_activity,
+    show_hand_to_character,
 )
 from icecream import ic
 
@@ -15,6 +17,7 @@ from icecream import ic
 def run():
     game_code = st.query_params.game
     player_code = st.query_params.player
+    players = get_data("players", game_code=game_code)
     with st.container(border=True):
         help = "Select general actions"
         st.title("Actions", help=help)
@@ -34,12 +37,26 @@ def run():
             ],
             on_change=set_general_action,
         )
+        if "show_hand_to_character" in st.session_state:
+            st.session_state.pop("show_hand_to_character")
+            options = [
+                player["character"]
+                for player in players.values()
+                if player["player_code"] != player_code
+            ]
+            st.selectbox(
+                "Select Character to Show Hand",
+                index=None,
+                key="show_hand_to_character",
+                options=options,
+                on_change=show_hand_to_character,
+            )
+
     with st.container(border=True):
         help = (
             "Select cards from your hand and then choose actions for individual cards."
         )
         st.title("Selected Cards", help=help)
-        players = get_data("players", game_code=game_code)
         for card_id in players[player_code]["selected_cards"]:
             my_cards = players[player_code]["cards"]
             with st.container():
