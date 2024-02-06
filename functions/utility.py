@@ -240,12 +240,14 @@ def remove_card_from_hand(card_id, player_code=None):
 
 
 def add_card_to_discard(card_id):
+    card = get_card(card_id)
     game_code = st.query_params.game
     unselect_card(card_id, for_all_players=True)
     discards = get_data("discards", game_code=game_code)
     discards.append(card_id)
     set_data("discards", discards, game_code=game_code)
     remove_card_from_hand(card_id)
+    add_activity(f"Discard ({card['name']})")
 
 
 def keep_card(card_id):
@@ -306,6 +308,32 @@ def transfer_card(card_id):
     return
 
 
+def place_card_on_table(card_id):
+    game_code = st.query_params.game
+    table_cards = get_data("table_cards", game_code=game_code)
+    table_cards.append(card_id)
+    set_data("table_cards", table_cards, game_code=game_code)
+
+
+def discard_table_card(card_id):
+    game_code = st.query_params.game
+    table_cards = get_data("table_cards", game_code=game_code)
+    if card_id in table_cards:
+        table_cards.remove(card_id)
+        set_data("table_cards", table_cards, game_code=game_code)
+    add_card_to_discard(card_id)
+    return
+
+
+def retain_table_card(card_id):
+    game_code = st.query_params.game
+    table_cards = get_data("table_cards", game_code=game_code)
+    if card_id in table_cards:
+        table_cards.remove(card_id)
+        set_data("table_cards", table_cards, game_code=game_code)
+    return
+
+
 def show_hand_to_character():
     character = st.session_state["show_hand_to_character"]
     st.session_state.pop("show_hand_to_character")
@@ -331,11 +359,14 @@ def set_action(card_id):
         use_card_for_battle(card_id, "attacker")
     elif action == "Discard":
         add_card_to_discard(card_id)
+        return
     elif action == "Take for Friendly Exchange":
         card_owner = get_card_owner(card_id)
         transfer_card(card_id)
         add_activity(f"{action} (from {card_owner['character']})")
         return
+    elif action == "Place on table":
+        place_card_on_table(card_id)
     add_activity(f"{action} ({card['name']})")
     return
 

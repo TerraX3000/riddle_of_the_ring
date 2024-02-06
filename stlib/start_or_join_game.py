@@ -44,6 +44,7 @@ def initialize_game(game_code, player_code, character):
         initialize_game_data(category="discards", game_code=game_code, data=[])
         battle = {"attacker_cards": [], "defender_cards": []}
         initialize_game_data(category="battle", data=battle, game_code=game_code)
+        initialize_game_data(category="table_cards", data=[], game_code=game_code)
 
         print("+++++ Session initialization complete +++++++")
 

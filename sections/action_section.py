@@ -80,7 +80,7 @@ def run():
                         "Power Play",
                         "Use to Attack",
                         "Use to Defend",
-                        "In Use",
+                        "Place on table",
                         "Use Spy",
                         "Use Riddle",
                         "Show Card to Player",

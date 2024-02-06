@@ -19,6 +19,8 @@ def run():
         st.write(get_data("games"))
         st.write("Battle")
         st.write(get_data("battle", game_code=game_code))
+        st.write("Table Cards")
+        st.write(get_data("table_cards", game_code=game_code))
     with col_2:
         st.write("Players")
         st.write(get_data("players", game_code=game_code))
