@@ -11,7 +11,8 @@ def run():
     players = get_data("players", game_code=game_code)
     characters = get_data("characters")
     positions = players[player_code]["positions"]
-    with Image.open("checkerboard.png") as img:
+    # with Image.open("checkerboard.png") as img:
+    with Image.open("board.webp") as img:
         draw = ImageDraw.Draw(img)
         # Draw an ellipse at each coordinate in position
         for player in players.values():

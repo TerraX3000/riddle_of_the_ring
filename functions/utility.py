@@ -78,11 +78,8 @@ def add_activity(action):
 
 @st.cache_data
 def get_cards():
-    print("cached cards")
-    with open(f"data/cards.yaml") as f:
-        data = yaml.load(f, Loader=yaml.SafeLoader)
-    return data
-    # return get_data("cards")
+    cards = read_yaml("data/cards.yaml")
+    return cards
 
 
 def get_card_owner(card_id):
@@ -371,9 +368,10 @@ def set_action(card_id):
     return
 
 
-def set_general_action():
-    action = st.session_state[f"general_action"]
-    st.session_state[f"general_action"] = None
+def set_general_action(action=None):
+    if action is None:
+        action = st.session_state[f"general_action"]
+        st.session_state[f"general_action"] = None
     if action == "Attack from Good City":
         add_city_battle_card("attacker", "good")
     elif action == "Attack from Evil City":

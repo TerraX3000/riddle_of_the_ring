@@ -1,0 +1,22 @@
+- name: Start Turn
+  image: data/button_images/start_turn.png
+- name: Roll Die
+  image: data/button_images/roll_die.png
+- name: Draw Card
+  image: data/button_images/draw_card.png
+- name: Show Hand to Player
+  image: data/button_images/show_hand.png
+- name: Surrender
+  image: data/button_images/surrender.png
+- name: Attack from Good City
+  image: data/button_images/attack_good.png
+- name: Defend from Good City
+  image: data/button_images/defend_good.jpeg
+- name: Attack from Evil City
+  image: data/button_images/attack_evil.png
+- name: Defend from Evil City
+  image: data/button_images/defend_good.jpeg
+- name: End Turn
+  image: data/button_images/end_turn.png
+
+ 

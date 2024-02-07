@@ -1,5 +1,6 @@
 import streamlit as st
 from functions.utility import (
+    read_yaml,
     get_data,
     get_card_owner,
     get_card,
@@ -21,6 +22,21 @@ def run():
     with st.container(border=True):
         help = "Select general actions"
         st.title("Actions", help=help)
+        action_buttons = read_yaml("data/action_buttons.yaml")
+        button_columns_row_1 = st.columns([1, 1, 1, 1, 1])
+        button_columns_row_2 = st.columns([1, 1, 1, 1, 1])
+        for action_button, button_column in zip(
+            action_buttons, button_columns_row_1 + button_columns_row_2
+        ):
+            with button_column:
+                st.image(action_button["image"])
+                st.button(
+                    action_button["name"],
+                    use_container_width=True,
+                    on_click=set_general_action,
+                    kwargs={"action": action_button["name"]},
+                )
+
         st.selectbox(
             "Select Action",
             index=None,
