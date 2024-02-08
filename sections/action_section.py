@@ -20,6 +20,8 @@ def run():
     player_code = st.query_params.player
     players = get_data("players", game_code=game_code)
     is_current_turn = players[player_code]["current_turn"]
+    game = get_data("game", game_code=game_code)
+    is_game_started = game["is_started"]
     with st.container(border=True):
         help = "Select general actions"
         st.title("Actions", help=help)
@@ -31,12 +33,22 @@ def run():
         ):
             with button_column:
                 st.image(action_button["image"])
+                is_pre_start_only = action_button.get("is_pre_start_only")
+                is_post_start_only = action_button.get("is_post_start_only")
                 is_current_turn_only = action_button.get("is_current_turn_only")
                 is_not_current_turn_only = action_button.get("is_not_current_turn_only")
                 button_enabled = True
-                if is_current_turn_only:
+                if is_pre_start_only and not is_game_started:
+                    button_enabled = True
+                if is_pre_start_only and is_game_started:
+                    button_enabled = False
+                if is_post_start_only and not is_game_started:
+                    button_enabled = False
+                if is_post_start_only and is_game_started:
+                    button_enabled = False
+                if is_current_turn_only and is_game_started:
                     button_enabled = is_current_turn
-                elif is_not_current_turn_only == True:
+                elif is_not_current_turn_only == True and is_game_started:
                     button_enabled = not is_current_turn
                 disabled = not button_enabled
                 st.button(

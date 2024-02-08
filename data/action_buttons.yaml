@@ -1,31 +1,40 @@
-- name: Start Turn
-  is_current_turn_only: True
+- name: Start Game
+  is_pre_start_only: True
   image: data/button_images/start_turn.png
 - name: Roll Die
+  is_post_start_only: True
   is_current_turn_only: True
   image: data/button_images/roll_die.png
 - name: Draw Card
+  is_post_start_only: True
   is_current_turn_only: True
   image: data/button_images/draw_card.png
 - name: Show Hand to Player
+  is_post_start_only: True
   is_current_turn_only: True
   image: data/button_images/show_hand.png
 - name: Surrender
+  is_post_start_only: True
   is_current_turn_only: True
   image: data/button_images/surrender.png
 - name: Attack from Good City
+  is_post_start_only: True
   is_current_turn_only: True
   image: data/button_images/attack_good.png
 - name: Defend from Good City
+  is_post_start_only: True
   is_not_current_turn_only: True
   image: data/button_images/defend_good.jpeg
 - name: Attack from Evil City
+  is_post_start_only: True
   is_current_turn_only: True
   image: data/button_images/attack_evil.png
 - name: Defend from Evil City
+  is_post_start_only: True
   is_not_current_turn_only: True
   image: data/button_images/defend_good.jpeg
 - name: End Turn
+  is_post_start_only: True
   is_current_turn_only: True
   image: data/button_images/end_turn.png
 

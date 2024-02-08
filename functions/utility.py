@@ -193,9 +193,10 @@ def is_card_selected_or_in_use(card_id):
     return is_selected
 
 
-def draw_cards(number=1):
+def draw_cards(number=1, player_code=None):
     game_code = st.query_params.game
-    player_code = st.query_params.player
+    if player_code is None:
+        player_code = st.query_params.player
     draw_pile = get_data("draw_pile", game_code=game_code)
     draw_cards = []
     for x in range(number):
@@ -360,6 +361,22 @@ def set_next_turn():
     return
 
 
+def start_game():
+    game_code = st.query_params.game
+    game = get_data("game", game_code=game_code)
+    if game["is_started"] == False:
+        game["is_started"] = True
+        set_data("game", game, game_code=game_code)
+        players = get_data("players", game_code=game_code)
+        player_codes = list(players.keys())
+        player_code = random.choice(player_codes)
+        players[player_code]["current_turn"] = True
+        set_data("players", players, game_code=game_code)
+        for player_code in player_codes:
+            draw_cards(number=2, player_code=player_code)
+    return
+
+
 def set_action(card_id):
     card = get_card(card_id)
     action = st.session_state[f"action_{card_id}"]
@@ -405,8 +422,9 @@ def set_general_action(action=None):
         roll = random.randint(1, 6)
         action += f": {roll}"
     elif action == "End Turn":
-        ic(action)
         set_next_turn()
+    elif action == "Start Game":
+        start_game()
     add_activity(action)
 
 

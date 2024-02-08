@@ -15,8 +15,10 @@ def run():
     with col_1:
         st.write("Session State")
         st.write(st.session_state)
+        st.write("Game")
+        st.write(get_data("game", game_code=game_code))
         st.write("Games")
-        st.write(get_data("games"))
+        st.write(get_data("games"), game_code=game_code)
         st.write("Battle")
         st.write(get_data("battle", game_code=game_code))
         st.write("Table Cards")
