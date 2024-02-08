@@ -344,6 +344,22 @@ def show_hand_to_character():
     return
 
 
+def set_next_turn():
+    game_code = st.query_params.game
+    player_code = st.query_params.player
+    players = get_data("players", game_code=game_code)
+    turn_order: List = list(players.keys())
+    current_turn_index = turn_order.index(player_code)
+    num_players = len(players)
+    next_turn_index = current_turn_index + 1
+    next_turn_index = next_turn_index % num_players
+    next_player_code = turn_order[next_turn_index]
+    players[player_code]["current_turn"] = False
+    players[next_player_code]["current_turn"] = True
+    set_data("players", players, game_code=game_code)
+    return
+
+
 def set_action(card_id):
     card = get_card(card_id)
     action = st.session_state[f"action_{card_id}"]
@@ -388,6 +404,9 @@ def set_general_action(action=None):
     elif action == "Roll Die":
         roll = random.randint(1, 6)
         action += f": {roll}"
+    elif action == "End Turn":
+        ic(action)
+        set_next_turn()
     add_activity(action)
 
 
