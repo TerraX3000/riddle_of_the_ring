@@ -6,14 +6,14 @@ from PIL import Image, ImageDraw
 
 
 def run():
-    st.write("New board")
+    st.write("png board")
     game_code = st.query_params.game
     player_code = st.query_params.player
     players = get_data("players", game_code=game_code)
     characters = get_data("characters")
     positions = players[player_code]["positions"]
     # with Image.open("checkerboard.png") as img:
-    with Image.open("static/rotr-board.jpg") as img:
+    with Image.open("static/rotr-board.png") as img:
         # with Image.open("board.webp") as img:
         draw = ImageDraw.Draw(img)
         # Draw an ellipse at each coordinate in position
