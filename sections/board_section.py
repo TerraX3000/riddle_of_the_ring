@@ -6,6 +6,7 @@ from PIL import Image, ImageDraw
 
 
 def run():
+    st.write("New board")
     game_code = st.query_params.game
     player_code = st.query_params.player
     players = get_data("players", game_code=game_code)
