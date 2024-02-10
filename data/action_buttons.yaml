@@ -24,7 +24,7 @@
 - name: Defend from Good City
   is_post_start_only: True
   is_not_current_turn_only: True
-  image: data/button_images/defend_good.jpeg
+  image: data/button_images/defend_good.png
 - name: Attack from Evil City
   is_post_start_only: True
   is_current_turn_only: True
@@ -32,7 +32,7 @@
 - name: Defend from Evil City
   is_post_start_only: True
   is_not_current_turn_only: True
-  image: data/button_images/defend_good.jpeg
+  image: data/button_images/defend_evil.png
 - name: End Turn
   is_post_start_only: True
   is_current_turn_only: True
