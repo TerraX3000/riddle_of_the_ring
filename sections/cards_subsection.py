@@ -22,6 +22,7 @@ def run():
     players = get_data("players", game_code=game_code)
     ordered_players = OrderedDict(players)
     ordered_players.move_to_end(player_code, last=False)
+    placeholder = st.empty()
     player_tabs = st.tabs([player["character"] for player in ordered_players.values()])
     for player, player_tab in zip(ordered_players.values(), player_tabs):
         is_my_cards = False
@@ -38,7 +39,7 @@ def run():
         with player_tab:
             player_cards = player["cards"]
             if is_show_hand_to_character:
-                st.info(f"{player['character']} is showing hand to you.")
+                placeholder.info(f"{player['character']} is showing hand to you.")
             card_row_1 = st.columns([1, 1, 1, 1, 1, 1, 1, 1, 1, 1])
             if len(player_cards) > 10:
                 st.divider()
