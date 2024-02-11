@@ -1,0 +1,31 @@
+B-1 THE GAME COMPONENTS
+The following components are included in Riddle of the Ring:
+- One full-colored, mounted, puzzle-cut board (6 pieces).
+- One set of Basic Rules (8 pages).
+- One set of Advanced/Optional Rules (4 pages).
+- Eight plastic playing pieces (markers).
+- 96 playing cards.
+- One six-sided die.
+THE BOARD - The board represents the northwestern area of Middle-earth where most of the action in The Lord of the Rings takes place. The map section of the board is divided into hexagon shaped areas called "spaces". Movement on the board consists of moving from space to space. Each space is of a certain type (see Section B-6) as indicated on the Terrain Key on the board.
+THE MARKERS - There are 8 plastic playing pieces called "markers", each one representing either a Hobbit or a Black Rider. These markers are used to indicate a player's location on the board.
+Frodo — Sam — Merry — Pippin —
+White Ring Green Ring Blue Ring Yellow Ring
+Black Rider l — Black Rider 2 — Black Rider 3 — Black Rider 4 —
+Black Ring Red Ring Brown Ring Grey Ring
+THE CARDS - There are six types of cards in the game: travel cards, army cards, character cards, special cards, optional cards, and blank cards. The acquisition and use of these cards are key elements of play in Riddle of the Ring. A complete list of these cards follows:
+TRAVEL CARDS — 5 Boats
+5 Ropes
+5 Cloaks
+6 Horses
+2 Eagles
+2 Flying Beasts
+for travel on water and rivers for travel in mountains for travel in forests for additional moves for Hobbits to fly anywhere for Black Riders to fly anywhere
+ARMY CARDS —
+7 Good Armies
+
+| 5 | Boats         | for travel on water and rivers   |
+| 5 | Ropes         | for travel in mountains          |
+| 5 | Cloaks        | for travel in forests            |
+| 6 | Horses        | for additional moves             |
+| 2 | Eagles        | for Hobbits to fly anywhere      |
+| 2 | Flying Beasts | for Black Riders to fly anywhere |

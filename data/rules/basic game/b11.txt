@@ -1,0 +1,30 @@
+B-11 BATTLES
+Battles are just one kind of Power Play, but certain conditions must occur and certain steps must be followed to have a battle.
+STARTING A BATTLE
+Any player may attack any other player after landing on, or beside, the space occupied by another player and having a Friendly Exchange with him. No player may start a battle at the very beginning of his turn, before moving. If a player has no cards for a Friendly Exchange, he cannot be in a battle.
+Friendly Exchanges & Battles may take place across Rivers, in the ocean, or on any other kinds of spaces if both players are on the same or adjacent spaces. When a player is on a River Dot, only the 3 spaces which come together at that River Dot are adjacent to him.
+Each battle, no matter how many different rounds it has, counts as 1 Power Play. A player may attack 2 different players per turn, but he may not attack the same player more than once per turn.
+BATTLE FORCES
+Any player may attack any other player with the proper kinds of forces. The kinds of battle forces are Good, Evil and Neutral. Neutral forces may be either Good or Evil, as a player using them chooses.
+Good Forces Evil Forces Neutral Forces
+The Attacker (the player whose turn it is) may only use forces opposite in kind to the defender. Any player may only attack a Hobbit with Evil and Neutral forces. Any player may only attack a Black Rider with Good and Neutral forces.
+The defender always uses forces of his own kind. Hobbits always defend with Good and Neutral forces. Black Riders always defend with Evil and Neutral Forces.
+BATTLE POINTS
+Any card with "Battle Points" printed at the bottom is a battle force. Symbols at the top show whether the card is Good, Evil or Neutral. The number of battle points indicate how strong the force is in battle.
+Cities of the proper kind (Good or Evil) may be used as forces in certain battles. If either player in a battle is on or beside a city of the proper kind (Good or Evil) for use by either side, that city can be used for one battle point by the appropriateplayer. TheplayerusingtheCitydoesnothave to be on or beside it if the other player is on or beside it. Neutral Cities are not used in battles.
+A Hobbit player may attack other Hobbits, and a Black Rider player may attack other Black Riders, using the rules on correct forces already given. This means that a player may not use his own character card to attack a player of his own kind, but he may use other forces under his control.
+RESOLVING BATTLES
+After a player has moved and had a Friendly Exchange, he may attack from that space at any time during that turn. If he moves again to another space on, or beside, the other player, he must have another Friendly Exchange before attacking.
+The battle is resolved as follows:
+(1) The attacker presents one of his battle forces: an appropriate card from his hand with at least one battle point or an appropriate city (see "Battle Forces" above). Cards used are placed face up on the table until the end of the battle.
+(2) The defender may then present battle forces (appropriate cards and cities) to match (equal) the total number of battle points used against him by the attacker.
+(3) The attacker may then present another battle force (card or city).
+(4) The defender may try to increase his battle point total to match the attacker's battle point total.
+(5) This sequence of rounds may continue until the attacker presents more total points than the defender can match or until the attacker has presented a total of 5 battle points which the defender has matched. No player may use more than 5 Battle Points in a Battle.
+Neither player is required to present battle forces when he wants to quit. The defender may surrender (lose) at any round of a battle by not presenting cards in his hand to match the attacker's points. The attacker may choose to settle for a tie by not presenting cards to start another round after the defender has just matched his points.
+WINNING THE BATTLE
+The attacker wins the battle if he presents more battle points (up to 5) than the defender can match. If the defender matches all the attacker's points, the battle ends in a tie. Only the attacker can win a battle; the defender may not present more points than the attacker and win a battle. The defender, however, may counter-attack when his own turn comes around, by following the same rules and starting a new battle, after moving and having a Friendly Exchange.
+When the attacker wins a battle, he sees the entire hand of the loser. He then takes 1 card of his choice from the loser's hand and sends the loser to The Halls of Mandos (see Section B-12).
+DISCARDING AFTER BATTLES
+Except for cards with "Retain" printed after the battle points, all cards used in battle (both the attacker's and the defender's) are placed in the Discard Pile at the end of a battle. The only cards retained are The Ring card and a player's own character card. Such cards go back into the hands of the players who used them.
+

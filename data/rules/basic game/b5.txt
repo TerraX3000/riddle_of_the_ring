@@ -1,0 +1,15 @@
+B-5 MOVING A MARKER
+When a player rolls the die at the beginning of his turn, he may use the number rolled to move his marker on the board. The number rolled indicates how many spaces the player's marker may enter this turn (i.e., how many spaces the marker may move).
+EXAMPLE: If a 4 is rolled, then the player's marker may enter (or move) 1, 2, 3, or 4 spaces as the player desires.
+The type of space moved into may affect the rest of a player's movement. See Section B-6 and the "Key to the Board" on the Reference Sheet for instructions on how the different kinds of spaces affect movement.
+The player may move his marker first, or he may choose to do some other activity before moving. For example, he may use one of his cards and then move. He does not have to move immediately after rolling the die.
+A player may move his marker in any direction on the board, and must move it at least one space per turn. No player's marker may begin and end his turn on the same space, unless that space is one of the two victory spaces (the Cracks of Doom and Barad-dûr). Markers may be moved through and stopped on spaces occupied by another player's marker. Movement is generally from one space to an adjacent (touching) space.
+EXAMPLE: With a roll of 3, a player may move up to 3 spaces in any direction.
+ADDITIONAL MOVES
+In addition to making moves with the die roll, a player may make additional moves by using cards such as Horses, Eagles and Flying Beasts. (Read instructions on some of these cards). As with the die roll, a player is not required to use the full movement shown on a Horse card. He may move any number of spaces up to and including the number shown.
+COMBINING MOVEMENT AND OTHER ACTIVITIES
+During his turn, a player may choose to stop on a particular space and do an activity. He may then move again during that same turn if he has some other means of moving.
+EXAMPLE: A player could move using his die roll, stop and do an activity, and then move again using a Horse card. Alternatively, he could use the Horse card and then the die roll.
+A player may not stop and then move again using any unused portion of his die roll, Horse card, or other card that got him there. He must use an extra means of travel to move again if he has stopped.
+A player may stop and then move again as long as he has an unused Horse card, an unused Eagles card, an unused Flying Beasts card, or has not used his die roll.
+NOTE: No player may begin and end a move, including an additional move, on the same space. Each move must end on a different space.

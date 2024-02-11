@@ -1,0 +1,20 @@
+B-10 POWER PLAYS
+Power Plays are activities involving other players. Except for a Friendly Exchange (which is not a Power Play), every activity involving another player is a Power Play.
+Players may make up to 2 Power Plays per turn. They may have 2 Power Plays with the same player or 1 with 2 different players. Players do not have to make any Power Plays, but they cannot have over 2 per turn.
+There are 4 different kinds of Power Plays. The 2 Power Plays per turn may both be the same kind or 2 different kinds, as a player chooses.
+THE FOUR KINDS OF POWER PLAYS
+The four kinds of Power Plays are listed below. Players do not need to memorize this list. Instructions for using cards to make Power Plays are on the cards. Use this list for reference during the game.
+(1) Clairvoyance: A Wizard, Elf Ring, Palantir, or Spy card may be used to see all the cards in another player's hand. The other player may resist an Elf Ring or a Palantir card by showing only The Ring card or his own character cardinsteadofhisentirehand. Otherplayersshouldnotseethecardusedto resist. TheWizardcards(Gandalf,Sauron,Galadriel,Balrog)andSpycards cannot be resisted, even by another Wizard. Each attempt to see another player's hand, whether resisted or not, counts as 1 Power Play. Seeing two players' hands counts as 2 Power Plays.
+(2) Riddles: A Riddle card may be used to draw 1 card at random from another player's hand and try to guess its title. Titles are in large print at the top of each card. Normally, guessing consists of stating three titles, one after another. However if the player you riddle has only 3 cards you only get two guesses, and if he has 1 or 2 cards you only get one guess. You have "guessed" right if the card's title matches any of the titles you stated.
+If you guess right, you keep the card guessed and may try to guess another card in that player's hand (you may end the Riddle). If you guess wrong, the other player draws a card from your hand at random to keep and the Riddle ends. If the only card in your hand is a Riddle card, you cannot use it; you must have 1 other card to lose in case you guess wrong. Each Riddle card used, no matter how many cards you get with it, counts as 1 Power Play.
+(3) Using a Card to Take a Card from Another Player:
+Gollum:
+Bilbo: Shelob:
+The Gollum card may be used to take The Ring card from any one player of your choice. Instructions are on the Gollum card. Use of Gollum counts as 1 Power Play, whether or not you get The Ring card.
+The Bilbo card may be used to take the Gollum card from another player. Instructions are on the Bilbo card. Use of Bilbo counts as 1 Power Play, whether or not you get The Ring card.
+The Shelob card may be used to take one card from each of the other players. However, these cards must all be discarded. If The Ring or Gollum cards are chosen, they are not taken and there is no additional draw (it still counts as 1 Power Play).
+Hobbit & Black Rider Cards: The character card of a Hobbit or a Black Rider may be used to either draw 1 card at random from any player's hand or to see the hand of the player indicated by the card, take the card of your choice from his hand, and finally give him the character card. Each Hobbit or Black Rider card used to take or draw a card is 1 Power Play. (Note: With only 2 players in a game, consider Variation O-13 in the Optional Rules to restrict draws of this type.)
+(4) Battles: The cards with Battle Points (Armies, The Ring, Eagles, Flying Beasts, and most character cards) and cities may be used to attack another player after having a Friendly Exchange with him. Each Battle is 1 Power Play. See Section B-11 for a description of how to handle battles.
+WHEN AND WHERE TO MAKE POWER PLAYS
+Make Power Plays before and/or after moving but not while moving. Once started, a Power Play may not be interrupted by another activity, such as another Power Play.
+Most Power Plays may be made with your marker at any distance from the other player's marker. Only Elf Rings and Battles require both players to be near each other on the board.
