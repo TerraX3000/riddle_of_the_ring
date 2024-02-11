@@ -13,7 +13,6 @@ def run(battle_role):
     st.markdown(f"## {battle_role.title()}")
     game_code = st.query_params.game
     battle = get_data("battle", game_code=game_code)
-    ic(battle)
     battle_card_columns = st.columns(
         [
             1,

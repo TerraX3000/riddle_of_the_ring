@@ -13,6 +13,8 @@ def run():
     game_code = st.query_params.game
     player_code = st.query_params.player
     players = get_data("players", game_code=game_code)
+    characters = get_data("characters")
+    player_character = characters[players[player_code]["character"]]
     is_current_turn = players[player_code]["current_turn"]
     game = get_data("game", game_code=game_code)
     is_game_started = game["is_started"]
@@ -30,6 +32,7 @@ def run():
             is_post_start_only = action_button.get("is_post_start_only")
             is_current_turn_only = action_button.get("is_current_turn_only")
             is_not_current_turn_only = action_button.get("is_not_current_turn_only")
+            is_side = action_button.get("is_side")
             button_enabled = True
             if is_pre_start_only and not is_game_started:
                 button_enabled = True
@@ -43,6 +46,10 @@ def run():
                 button_enabled = is_current_turn
             elif is_not_current_turn_only == True and is_game_started:
                 button_enabled = not is_current_turn
+            if button_enabled and is_side:
+                if is_side != player_character["side"]:
+                    button_enabled = False
+
             disabled = not button_enabled
             st.button(
                 action_button["name"],

@@ -18,18 +18,22 @@
   is_current_turn_only: True
   image: data/button_images/surrender.png
 - name: Attack from Good City
+  is_side: good
   is_post_start_only: True
   is_current_turn_only: True
   image: data/button_images/attack_good.png
 - name: Defend from Good City
+  is_side: good
   is_post_start_only: True
   is_not_current_turn_only: True
   image: data/button_images/defend_good.png
 - name: Attack from Evil City
+  is_side: evil
   is_post_start_only: True
   is_current_turn_only: True
   image: data/button_images/attack_evil.png
 - name: Defend from Evil City
+  is_side: evil
   is_post_start_only: True
   is_not_current_turn_only: True
   image: data/button_images/defend_evil.png
