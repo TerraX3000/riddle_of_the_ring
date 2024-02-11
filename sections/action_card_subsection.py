@@ -59,11 +59,11 @@ def run():
             else:
                 is_card_owner = False
                 card_owner = get_card_owner(card_id)
-                card_image = "red_joker"
+                card_image = "Reverse"
                 card_name = f"<{card_owner['character']} Card>"
             card = get_card(card_id)
             st.image(
-                f"data/card_images/{card_image}.png",
+                f"static/card_images/{card_image}.png",
                 caption=card_name,
             )
     if selected_cards:

@@ -1,5 +1,6 @@
 import streamlit as st
 from sections import navbar
+from sections import info_card_library
 
 
 def run():
@@ -16,3 +17,4 @@ def run():
 
     with cards_tab:
         st.write("These are the cards")
+        info_card_library.run()

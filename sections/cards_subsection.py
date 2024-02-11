@@ -56,7 +56,7 @@ def run():
                         card_image = card["image"]
                         card_name = f'{card["name"]} [{card_id}]'
                     else:
-                        card_image = "red_joker"
+                        card_image = "Reverse"
                         card_name = ""
 
                     st.button(
@@ -71,7 +71,7 @@ def run():
                         disabled=is_card_selected_or_in_use(card_id=card["id"]),
                     )
                     st.image(
-                        f"data/card_images/{card_image}.png",
+                        f"static/card_images/{card_image}.png",
                         caption=card_name,
                     )
             if is_my_cards:

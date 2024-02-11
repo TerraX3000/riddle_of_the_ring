@@ -75,7 +75,7 @@ def add_activity(action):
     set_data("activities", activities, game_code=game_code)
 
 
-@st.cache_data
+# @st.cache_data
 def get_cards():
     cards = read_yaml("data/cards.yaml")
     return cards
