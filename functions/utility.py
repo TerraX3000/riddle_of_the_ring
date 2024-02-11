@@ -304,9 +304,9 @@ def retain_battle_card(card_id, battle_role):
 
 def add_city_battle_card(battle_role, side):
     if side == "good":
-        card_id = 24
+        card_id = 91
     if side == "evil":
-        card_id = 25
+        card_id = 92
     use_card_for_battle(card_id, battle_role)
 
 
