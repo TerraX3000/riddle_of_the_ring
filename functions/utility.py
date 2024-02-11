@@ -124,12 +124,25 @@ def get_player_cards(player_id: int = None, character: str = None):
         return None
 
 
-def add_selected_card(card_id):
+def shuffle_player_cards():
     game_code = st.query_params.game
     player_code = st.query_params.player
     players = get_data("players", game_code=game_code)
-    unselect_all_cards(game_code=game_code, player_code=player_code, players=players)
+    player_cards = players[player_code]["cards"]
+    random.shuffle(player_cards)
+    players[player_code]["cards"] = player_cards
+    set_data("players", players, game_code=game_code)
+    return
+
+
+def add_selected_card(card_id, selected_card_index=None, card_owner_player_code=None):
+    game_code = st.query_params.game
+    player_code = st.query_params.player
+    unselect_all_cards()
     players = get_data("players", game_code=game_code)
+    if card_owner_player_code != player_code:
+        card_owner_cards = players[card_owner_player_code]["cards"]
+        card_id = card_owner_cards[selected_card_index]
     players[player_code]["selected_cards"].append(card_id)
     set_data("players", players, game_code=game_code)
     return
@@ -155,11 +168,10 @@ def unselect_card(card_id, for_all_players: bool = None):
     return
 
 
-def unselect_all_cards(game_code=None, player_code=None, players=None):
-    if game_code is None or player_code is None or players is None:
-        game_code = st.query_params.game
-        player_code = st.query_params.player
-        players = get_data("players", game_code=game_code)
+def unselect_all_cards():
+    game_code = st.query_params.game
+    player_code = st.query_params.player
+    players = get_data("players", game_code=game_code)
     selected_cards = players[player_code]["selected_cards"].copy()
     for card_id in selected_cards:
         unselect_card(card_id)
