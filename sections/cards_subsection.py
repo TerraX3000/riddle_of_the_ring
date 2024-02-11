@@ -54,7 +54,7 @@ def run():
                     card = get_card(card_id)
                     if is_my_cards or is_show_hand_to_character:
                         card_image = card["image"]
-                        card_name = f'{card["name"]} [{card_id}]'
+                        card_name = f'{card["name"]}'
                     else:
                         card_image = "Reverse"
                         card_name = ""
