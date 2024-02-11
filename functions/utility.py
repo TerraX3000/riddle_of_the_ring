@@ -128,11 +128,11 @@ def add_selected_card(card_id):
     game_code = st.query_params.game
     player_code = st.query_params.player
     players = get_data("players", game_code=game_code)
-    player = players[player_code]
-    ic(player)
-    # st.session_state["selected_cards"].append(card_id)
+    unselect_all_cards(game_code=game_code, player_code=player_code, players=players)
+    players = get_data("players", game_code=game_code)
     players[player_code]["selected_cards"].append(card_id)
     set_data("players", players, game_code=game_code)
+    return
 
 
 def unselect_card(card_id, for_all_players: bool = None):
@@ -155,10 +155,11 @@ def unselect_card(card_id, for_all_players: bool = None):
     return
 
 
-def unselect_all_cards():
-    game_code = st.query_params.game
-    player_code = st.query_params.player
-    players = get_data("players", game_code=game_code)
+def unselect_all_cards(game_code=None, player_code=None, players=None):
+    if game_code is None or player_code is None or players is None:
+        game_code = st.query_params.game
+        player_code = st.query_params.player
+        players = get_data("players", game_code=game_code)
     selected_cards = players[player_code]["selected_cards"].copy()
     for card_id in selected_cards:
         unselect_card(card_id)
@@ -377,10 +378,10 @@ def start_game():
     return
 
 
-def set_action(card_id):
+def set_action(action, card_id):
     card = get_card(card_id)
-    action = st.session_state[f"action_{card_id}"]
-    st.session_state[f"action_{card_id}"] = None
+    # action = st.session_state[f"action_{card_id}"]
+    # st.session_state[f"action_{card_id}"] = None
     if action == "Unselect":
         unselect_card(card_id)
     elif action == "Use to Defend":

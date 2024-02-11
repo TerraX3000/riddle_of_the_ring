@@ -26,7 +26,6 @@ def _get_session_from_redis_cache(sid) -> Dict:
 
 def get_data(key, game_code=None) -> Dict:
     try:
-        print(f"getting data for key={key}")
         r: redis.StrictRedis = azure_redis
         key_prefix = "riddle:"
         if game_code:

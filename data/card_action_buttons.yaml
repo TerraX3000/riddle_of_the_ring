@@ -1,0 +1,27 @@
+- name: Unselect
+- name: Retain
+  is_card_owner_only: True
+- name: Discard
+  is_current_turn_only: True
+  is_card_owner_only: True
+- name: Power Play
+  is_current_turn_only: True
+  is_card_owner_only: True
+- name: Use to Attack
+  is_current_turn_only: True
+  is_card_owner_only: True
+- name: Use to Defend
+  is_not_current_turn_only: True
+  is_card_owner_only: True
+- name: Place on table
+  is_card_owner_only: True
+- name: Use Spy
+  is_current_turn_only: True
+  is_card_owner_only: True
+- name: Use Riddle
+  is_current_turn_only: True
+  is_card_owner_only: True
+- name: Show Card to Player
+  is_card_owner_only: True
+- name: Take for Friendly Exchange
+  is_not_card_owner_only: True
