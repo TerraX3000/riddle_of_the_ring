@@ -31,7 +31,7 @@ def run():
                     f"{card_owner['character']} is showing this card to {show_card_to_player['show_card_to_character']}"
                 )
                 st.image(
-                    f"data/card_images/{card['image']}.png",
+                    f"static/card_images/{card['image']}.png",
                     caption=f"{card['name']} ({card_owner['character']})",
                 )
                 set_data("show_card_to_player", data=None, game_code=game_code)

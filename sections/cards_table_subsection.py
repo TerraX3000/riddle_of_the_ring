@@ -38,6 +38,6 @@ def run():
                 kwargs={"card_id": card["id"]},
             )
             st.image(
-                f"data/card_images/{card['image']}.png",
+                f"static/card_images/{card['image']}.png",
                 caption=f"{card['name']} ({card_owner['character']})",
             )

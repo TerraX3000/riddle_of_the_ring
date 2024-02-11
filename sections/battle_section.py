@@ -50,6 +50,6 @@ def run(battle_role):
                     kwargs={"card_id": card["id"], "battle_role": battle_role},
                 )
             st.image(
-                f"data/card_images/{card['image']}.png",
+                f"static/card_images/{card['image']}.png",
                 caption=card["name"],
             )
