@@ -11,7 +11,6 @@
   image: data/button_images/draw_card.png
 - name: Show Hand to Player
   is_post_start_only: True
-  is_current_turn_only: True
   image: data/button_images/show_hand.png
 - name: Surrender
   is_post_start_only: True
