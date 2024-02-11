@@ -34,21 +34,39 @@ def run():
             is_not_current_turn_only = action_button.get("is_not_current_turn_only")
             is_side = action_button.get("is_side")
             button_enabled = True
-            if is_pre_start_only and not is_game_started:
+            # ic(is_game_started)
+            # ic(action_button["name"])
+            # ic(button_enabled)
+            if button_enabled and is_pre_start_only and not is_game_started:
                 button_enabled = True
-            if is_pre_start_only and is_game_started:
+                ic("set1")
+            # ic(button_enabled)
+            if button_enabled and is_pre_start_only and is_game_started:
                 button_enabled = False
-            if is_post_start_only and not is_game_started:
+                ic("set2")
+            # ic(button_enabled)
+            if button_enabled and is_post_start_only and not is_game_started:
                 button_enabled = False
-            if is_post_start_only and is_game_started:
-                button_enabled = False
-            if is_current_turn_only and is_game_started:
+                ic("set3")
+            # ic(button_enabled)
+            # if button_enabled and is_post_start_only and is_game_started:
+            #     button_enabled = False
+            #     ic("set4")
+            # ic(button_enabled)
+            if button_enabled and is_current_turn_only and is_game_started:
                 button_enabled = is_current_turn
-            elif is_not_current_turn_only == True and is_game_started:
+                ic("set5")
+            elif (
+                button_enabled and is_not_current_turn_only == True and is_game_started
+            ):
                 button_enabled = not is_current_turn
+                ic("set6")
+            # ic(button_enabled)
             if button_enabled and is_side:
                 if is_side != player_character["side"]:
                     button_enabled = False
+                    ic("set7")
+            # ic(button_enabled)
 
             disabled = not button_enabled
             st.button(
