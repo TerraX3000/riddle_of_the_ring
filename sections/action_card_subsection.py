@@ -5,6 +5,7 @@ from functions.utility import (
     get_card_owner,
     get_card,
     set_action,
+    show_card_to_character,
 )
 import random
 import string
@@ -96,3 +97,18 @@ def run():
                     kwargs={"action": button["name"], "card_id": card_id},
                     disabled=disabled,
                 )
+        if "show_card_to_character" in st.session_state:
+            st.session_state.pop("show_card_to_character")
+            options = [
+                player["character"]
+                for player in players.values()
+                if player["player_code"] != player_code
+            ]
+            st.selectbox(
+                "Select Character to Show Card",
+                index=None,
+                key="show_card_to_character",
+                options=options,
+                on_change=show_card_to_character,
+                kwargs={"card_id": card_id},
+            )

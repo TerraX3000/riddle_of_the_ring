@@ -9,13 +9,20 @@ from functions.utility import (
 )
 from collections import OrderedDict
 from icecream import ic
-from sections import cards_subsection, cards_table_subsection
+from sections import (
+    cards_subsection,
+    cards_table_subsection,
+    cards_show_to_player_subsection,
+)
 
 
 def run():
     card_container = st.container(border=True)
+    show_card_container = st.container(border=True)
     table_cards_container = st.container(border=True)
     with card_container:
         cards_subsection.run()
+    with show_card_container:
+        cards_show_to_player_subsection.run()
     with table_cards_container:
         cards_table_subsection.run()

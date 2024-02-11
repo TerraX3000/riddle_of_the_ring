@@ -3,7 +3,6 @@ from typing import Tuple, Dict, List, Union
 from icecream import ic
 import yaml
 import json
-from models import Player
 from functions import redis_functions
 import random
 
@@ -358,6 +357,17 @@ def show_hand_to_character():
     return
 
 
+def show_card_to_character(card_id):
+    character = st.session_state["show_card_to_character"]
+    st.session_state.pop("show_card_to_character")
+    game_code = st.query_params.game
+    show_card_to_player = {"show_card_to_character": character, "show_card": card_id}
+    set_data("show_card_to_player", show_card_to_player, game_code=game_code)
+    action = "Show Card to Player"
+    add_activity(f"{action} ({character})")
+    return
+
+
 def set_next_turn():
     game_code = st.query_params.game
     player_code = st.query_params.player
@@ -410,6 +420,9 @@ def set_action(action, card_id):
         return
     elif action == "Place on table":
         place_card_on_table(card_id)
+    elif action == "Show Card to Player":
+        st.session_state["show_card_to_character"] = True
+        return
     add_activity(f"{action} ({card['name']})")
     return
 
