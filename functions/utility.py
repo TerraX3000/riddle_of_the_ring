@@ -64,13 +64,13 @@ def get_item(category: str, id: int, game_code=None):
     return None
 
 
-def add_activity(action):
+def add_activity(action, type="system"):
     game_code = st.query_params.game
     player_code = st.query_params.player
     players = get_data("players", game_code=game_code)
     player = players[player_code]
     activities = get_data("activities", game_code=game_code)
-    activity = {"player": {"character": player["character"]}, "action": action}
+    activity = {"player": {"character": player["character"]}, "action": action, "type": type}
     activities.append(activity)
     set_data("activities", activities, game_code=game_code)
 

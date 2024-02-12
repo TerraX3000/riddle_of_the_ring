@@ -39,15 +39,15 @@ def run():
             # ic(button_enabled)
             if button_enabled and is_pre_start_only and not is_game_started:
                 button_enabled = True
-                ic("set1")
+                # ic("set1")
             # ic(button_enabled)
             if button_enabled and is_pre_start_only and is_game_started:
                 button_enabled = False
-                ic("set2")
+                # ic("set2")
             # ic(button_enabled)
             if button_enabled and is_post_start_only and not is_game_started:
                 button_enabled = False
-                ic("set3")
+                # ic("set3")
             # ic(button_enabled)
             # if button_enabled and is_post_start_only and is_game_started:
             #     button_enabled = False
@@ -55,17 +55,17 @@ def run():
             # ic(button_enabled)
             if button_enabled and is_current_turn_only and is_game_started:
                 button_enabled = is_current_turn
-                ic("set5")
+                # ic("set5")
             elif (
                 button_enabled and is_not_current_turn_only == True and is_game_started
             ):
                 button_enabled = not is_current_turn
-                ic("set6")
+                # ic("set6")
             # ic(button_enabled)
             if button_enabled and is_side:
                 if is_side != player_character["side"]:
                     button_enabled = False
-                    ic("set7")
+                    # ic("set7")
             # ic(button_enabled)
 
             disabled = not button_enabled
