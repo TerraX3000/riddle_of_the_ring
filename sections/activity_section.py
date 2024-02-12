@@ -17,10 +17,12 @@ def update_chat_messages(message_container):
 
 
 def run():
-    st.markdown("# Messages")
+    help = "Displays messages from players and game activities.  Type 'm' to check for new messages"
+    st.title("Messages", help=help)
     messages = st.container(height=300)
     update_chat_messages(messages)
 
-    if prompt := st.chat_input("Say something"):
-        add_activity(prompt, type="user")
+    if prompt := st.chat_input("Say something or type 'm' to check for new messages"):
+        if prompt.lower() != "m":
+            add_activity(prompt, type="user")
         update_chat_messages(messages)
