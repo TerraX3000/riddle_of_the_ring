@@ -21,6 +21,9 @@ def run():
             "characters",
             "battle",
             "points",
+            "table_cards",
+            "game",
+            "show_card_to_player",
         ]
         for key in keys:
             redis_functions.delete_data(key, game_code=game_code)

@@ -52,7 +52,7 @@ def run():
                 st.rerun()
     elif is_show_exit_button:
         with nav_3:
-            if st.button("Refresh Game", use_container_width=True):
+            if st.button("Refresh Game (Alt+R)", use_container_width=True):
                 st.query_params.page = "play"
                 st.rerun()
         with nav_4:

@@ -8,3 +8,5 @@ enableStaticServing = true
 serverAddress = "localhost"
 gatherUsageStats = false
 serverPort = 8501
+[client]
+toolbarMode = "minimal"

@@ -1,5 +1,6 @@
 import streamlit as st
 from sections import (
+    game_chat_section,
     navbar,
     player_section,
     cards_section,
@@ -16,6 +17,8 @@ from functions.utility import (
     get_data,
 )
 
+from streamlit_shortcuts import add_keyboard_shortcuts
+
 
 def run():
     st.query_params.page = "play"
@@ -30,7 +33,13 @@ def run():
     else:
         style = """<style>h2,h3,h4,h5,h6 {text-align: center;}</style>"""
         st.markdown(style, unsafe_allow_html=True)
-        activity_section.run()
+        add_keyboard_shortcuts(
+            {
+                "Alt+®": "Refresh Game (Alt+R)",
+            }
+        )
+
+        game_chat_section.run()
 
         col_1, col_2, col_3 = st.columns([0.1, 0.5, 0.4])
 
@@ -56,8 +65,7 @@ def run():
         col_4, col_5, col_6 = st.columns([1, 3, 1])
 
         with col_4:
-            # activity_section.run()
-            ...
+            activity_section.run()
 
         with col_5:
             board_section.run()
