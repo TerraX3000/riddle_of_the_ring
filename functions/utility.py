@@ -70,7 +70,11 @@ def add_activity(action, type="system"):
     players = get_data("players", game_code=game_code)
     player = players[player_code]
     activities = get_data("activities", game_code=game_code)
-    activity = {"player": {"character": player["character"]}, "action": action, "type": type}
+    activity = {
+        "player": {"character": player["character"]},
+        "action": action,
+        "type": type,
+    }
     activities.append(activity)
     set_data("activities", activities, game_code=game_code)
 
@@ -400,6 +404,13 @@ def start_game():
     return
 
 
+def add_game_stat(key, value):
+    game_code = st.query_params.game
+    game = get_data("game", game_code=game_code)
+    game["stats"][key] = value
+    set_data("game", game, game_code=game_code)
+
+
 def set_action(action, card_id):
     card = get_card(card_id)
     # action = st.session_state[f"action_{card_id}"]
@@ -446,6 +457,7 @@ def set_general_action(action=None):
         draw_cards(1)
     elif action == "Roll Die":
         roll = random.randint(1, 6)
+        add_game_stat("Last Roll", roll)
         action += f": {roll}"
     elif action == "End Turn":
         set_next_turn()

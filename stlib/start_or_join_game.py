@@ -57,7 +57,7 @@ def initialize_game(game_code, player_code, character):
             game_code=game_code,
         )
 
-        game = {"is_started": False}
+        game = {"is_started": False, "stats": {}}
         initialize_game_data(category="game", data=game, game_code=game_code)
 
         print("+++++ Session initialization complete +++++++")

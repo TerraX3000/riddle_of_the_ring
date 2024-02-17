@@ -9,6 +9,7 @@ from sections import (
     activity_section,
     discard_section,
     battle_section,
+    game_stats_section,
 )
 from functions.utility import (
     show_battle_section,
@@ -38,8 +39,12 @@ def run():
                 "Alt+®": "Refresh Game (Alt+R)",
             }
         )
+        col_top_left, col_top_right = st.columns([0.5, 0.5])
 
-        game_chat_section.run()
+        game_chat_section.run(col_top_left)
+
+        with col_top_right:
+            game_stats_section.run()
 
         col_1, col_2, col_3 = st.columns([0.1, 0.5, 0.4])
 

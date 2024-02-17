@@ -20,6 +20,7 @@ def get_game_stats():
     game_code = st.query_params.game
     players = get_data("players", game_code=game_code)
     characters = get_data("characters")
+
     response = """"""
     hobbits = [
         player["character"]
@@ -39,7 +40,6 @@ def get_game_stats():
         response += f"""For the Black Riders, we have:\n\n {' '.join(black_riders)}"""
     else:
         response += f"""There are no Black Riders playing."""
-    print(response)
 
     add_activity(response, type="assistant")
 
@@ -60,10 +60,13 @@ def update_chat_messages(message_container):
             message_container.chat_message("assistant").write(activity["action"])
 
 
-def run():
+def run(col):
     help = "Displays messages from players and game activities.  Type 'm' to check for new messages"
-    st.title("Game Chat", help=help)
-    messages = st.container(height=300)
+    with col:
+        game_chat_container = st.container(border=True)
+        with game_chat_container:
+            st.title("Game Chat", help=help)
+            messages = st.container(height=300, border=False)
 
     if prompt := st.chat_input("Say something or type 'm' to check for new messages"):
         if prompt.lower() == "stats":
