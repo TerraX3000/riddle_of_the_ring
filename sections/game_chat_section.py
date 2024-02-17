@@ -1,5 +1,5 @@
 import streamlit as st
-from functions.utility import get_data, add_activity
+from functions.utility import get_data, add_activity, let_it_rain
 import time
 from icecream import ic
 
@@ -75,6 +75,9 @@ def run(col):
             cleaned_prompt = prompt.replace("ai", "").strip()
             add_activity(cleaned_prompt, type="assistant")
             get_ai_response()
+        elif prompt.lower().startswith("let it rain"):
+            add_activity(prompt, type="user")
+            let_it_rain()
         elif prompt.lower() != "m":
             add_activity(prompt, type="user")
     update_chat_messages(messages)
