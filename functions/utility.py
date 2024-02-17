@@ -364,13 +364,17 @@ def show_card_to_character(card_id):
     return
 
 
-def let_it_rain(emoji="🎈"):
-    rain(
-        emoji=emoji,
-        font_size=54,
-        falling_speed=5,
-        animation_length="infinite",
-    )
+def let_it_rain(emoji="🎈", key=None):
+    if key is not None:
+        emojis = {"cats": "🐈"}
+        emoji = emojis.get(key)
+    if emoji:
+        rain(
+            emoji=emoji,
+            font_size=54,
+            falling_speed=5,
+            animation_length="infinite",
+        )
 
 
 def set_next_turn():
@@ -386,7 +390,6 @@ def set_next_turn():
     players[player_code]["current_turn"] = False
     players[next_player_code]["current_turn"] = True
     set_data("players", players, game_code=game_code)
-    victory_celebration()
     return
 
 
