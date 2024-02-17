@@ -261,6 +261,7 @@ def add_card_to_discard(card_id):
     discards.append(card_id)
     set_data("discards", discards, game_code=game_code)
     remove_card_from_hand(card_id)
+    remove_table_card(card_id)
     add_activity(f"Discard ({card['name']})")
 
 
@@ -329,17 +330,7 @@ def place_card_on_table(card_id):
     set_data("table_cards", table_cards, game_code=game_code)
 
 
-def discard_table_card(card_id):
-    game_code = st.query_params.game
-    table_cards = get_data("table_cards", game_code=game_code)
-    if card_id in table_cards:
-        table_cards.remove(card_id)
-        set_data("table_cards", table_cards, game_code=game_code)
-    add_card_to_discard(card_id)
-    return
-
-
-def retain_table_card(card_id):
+def remove_table_card(card_id):
     game_code = st.query_params.game
     table_cards = get_data("table_cards", game_code=game_code)
     if card_id in table_cards:

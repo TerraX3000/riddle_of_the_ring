@@ -4,8 +4,8 @@ from functions.utility import (
     get_data,
     get_card,
     get_card_owner,
-    discard_table_card,
-    retain_table_card,
+    add_card_to_discard,
+    remove_table_card,
 )
 from collections import OrderedDict
 from icecream import ic
@@ -28,13 +28,13 @@ def run():
             st.button(
                 "Discard",
                 key=f'table_discard_{card["id"]}',
-                on_click=discard_table_card,
+                on_click=add_card_to_discard,
                 kwargs={"card_id": card["id"]},
             )
             st.button(
                 "Retain",
                 key=f'table_retain_{card["id"]}',
-                on_click=retain_table_card,
+                on_click=remove_table_card,
                 kwargs={"card_id": card["id"]},
             )
             st.image(
