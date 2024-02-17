@@ -364,10 +364,17 @@ def show_card_to_character(card_id):
     return
 
 
+st.cache_data
+
+
+def get_emojis():
+    emojis = {"cats": "🐈", "dogs": "🌭", "balloons": "🎈"}
+    return emojis
+
+
 def let_it_rain(emoji="🎈", key=None):
     if key is not None:
-        emojis = {"cats": "🐈"}
-        emoji = emojis.get(key)
+        emoji = get_emojis().get(key)
     if emoji:
         rain(
             emoji=emoji,

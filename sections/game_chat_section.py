@@ -1,5 +1,5 @@
 import streamlit as st
-from functions.utility import get_data, add_activity, let_it_rain
+from functions.utility import get_data, add_activity, let_it_rain, get_emojis
 import time
 from icecream import ic
 
@@ -63,7 +63,7 @@ def update_chat_messages(message_container):
             message_container.chat_message("assistant").write(action)
         elif type == "rain spell" and is_last:
             message_container.chat_message("assistant").write("LET IT RAIN!")
-            let_it_rain(emoji=action)
+            let_it_rain(key=action)
 
 
 def run(col):
@@ -83,13 +83,21 @@ def run(col):
             get_ai_response()
         elif prompt.lower().startswith("let it rain"):
             rain_object = prompt.lower().replace("let it rain", "").strip()
-            emojis = {"cats": "🐈", "dogs": "🌭", "balloons": "🎈"}
-            emoji = emojis.get(rain_object)
-            if emoji:
-                add_activity(emoji, type="rain spell")
+            emojis = get_emojis().keys()
+            if rain_object in emojis:
+                add_activity(prompt, type="user")
+                add_activity(rain_object, type="rain spell")
+            elif rain_object:
+                add_activity(prompt, type="user")
+                add_activity(
+                    f"Sorry, I don't know how to make it rain {rain_object}",
+                    type="assistant",
+                )
             else:
                 add_activity(prompt, type="user")
-                add_activity("That spell isn't quite right", type="assistant")
+                add_activity(
+                    "That spell isn't quite right, let it rain WHAT?", type="assistant"
+                )
         elif prompt.lower() != "m":
             add_activity(prompt, type="user")
     update_chat_messages(messages)
