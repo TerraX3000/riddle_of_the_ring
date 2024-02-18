@@ -73,7 +73,6 @@ def run():
                             caption=f"{card['name']} (From {former_card_owner} to {new_card_owner})",
                         )
             elif status.lower() == "pending":
-                print("status is pending")
                 placeholder.info(
                     f"Friendly exxhange is pending card selection by {second_party}"
                 )

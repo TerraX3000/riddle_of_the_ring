@@ -77,14 +77,17 @@ def run():
                 button_enabled = True
                 is_current_turn_only = button.get("is_current_turn_only")
                 is_card_owner_only = button.get("is_card_owner_only")
-                is_not_card_only_owner = button.get("is_not_card_only_owner")
+                is_not_card_owner_only = button.get("is_not_card_owner_only")
                 is_not_current_turn_only = button.get("is_not_current_turn_only")
                 is_battle_card_only = button.get("is_battle_card_only")
                 if button_enabled and is_current_turn_only:
                     button_enabled = is_current_turn
                 if button_enabled and is_card_owner_only:
                     button_enabled = is_card_owner
-                if button_enabled and is_not_card_only_owner:
+                if button_enabled and is_not_card_owner_only:
+                    ic(button["name"])
+                    ic(is_not_card_owner_only)
+                    ic(is_card_owner)
                     button_enabled = not is_card_owner
                 if button_enabled and is_not_current_turn_only:
                     button_enabled = not is_current_turn
