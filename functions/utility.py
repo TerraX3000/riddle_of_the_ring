@@ -113,6 +113,17 @@ def get_shuffled_deck():
     return cards
 
 
+def reset_draw_pile():
+    game_code = st.query_params.game
+    new_draw_pile = get_data("discards", game_code=game_code)
+    random.shuffle(new_draw_pile)
+    random.shuffle(new_draw_pile)
+    set_data("draw_pile", new_draw_pile, game_code=game_code)
+    set_data("discards", [], game_code=game_code)
+    add_activity("Resetting the draw pile!")
+    return
+
+
 def get_player_cards(player_id: int = None, character: str = None):
     game_code = st.query_params.game
     if player_id is not None:
@@ -215,6 +226,9 @@ def draw_cards(number=1, player_code=None):
     if player_code is None:
         player_code = st.query_params.player
     draw_pile = get_data("draw_pile", game_code=game_code)
+    if number > len(draw_pile):
+        reset_draw_pile()
+        draw_pile = get_data("draw_pile", game_code=game_code)
     draw_cards = []
     for x in range(number):
         draw_cards.append(draw_pile.pop())
