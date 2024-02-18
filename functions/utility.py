@@ -404,9 +404,25 @@ def give_card_to_character(card_id):
     return
 
 
-st.cache_data
+def riddle_player(card_id):
+    game_code = st.query_params.game
+    player_code = st.query_params.player
+    players = get_data("players", game_code=game_code)
+    this_character = players[player_code]["character"]
+    card_owner = get_card_owner(card_id)
+    character = card_owner["character"]
+    riddle_power_play = {
+        "riddle_card": card_id,
+        "card_owner": character,
+        "riddler": this_character,
+    }
+    set_data("riddle_power_play", riddle_power_play, game_code=game_code)
+    action = "Riddle Player"
+    add_activity(f"{action} ({character})")
+    return
 
 
+@st.cache_data
 def get_emojis():
     emojis = {"cats": "🐈", "dogs": "🌭", "balloons": "🎈"}
     return emojis
@@ -492,6 +508,9 @@ def set_action(action, card_id):
         return
     elif action == "Place on Table":
         place_card_on_table(card_id)
+    elif action == "Riddle Player":
+        riddle_player(card_id)
+        return
     elif action == "Show Card to Player":
         st.session_state["show_card_to_character"] = True
         return

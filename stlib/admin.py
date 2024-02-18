@@ -25,6 +25,8 @@ def run():
         st.write(get_data("table_cards", game_code=game_code))
         st.write("Show Card to Player")
         st.write(get_data("show_card_to_player", game_code=game_code))
+        st.write("Riddle Power Play")
+        st.write(get_data("riddle_power_play", game_code=game_code))
     with col_2:
         st.write("Players")
         st.write(get_data("players", game_code=game_code))

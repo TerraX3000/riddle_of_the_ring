@@ -20,9 +20,9 @@
 - name: Use Spy
   is_current_turn_only: True
   is_card_owner_only: True
-- name: Use Riddle
+- name: Riddle Player
   is_current_turn_only: True
-  is_card_owner_only: True
+  is_not_card_owner_only: False
 - name: Show Card to Player
   is_card_owner_only: True
 - name: Take Card from Player
