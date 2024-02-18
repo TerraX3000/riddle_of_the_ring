@@ -13,11 +13,24 @@ def run():
         game_code = st.query_params.game
         draw_pile = get_data("draw_pile", game_code=game_code)
         discards = get_data("discards", game_code=game_code)
+        activities = get_data("activities", game_code=game_code)
+        activities = [
+            activity for activity in activities if activity["type"] == "system"
+        ]
+        players = get_data("players", game_code=game_code)
+        activities_by_players = {
+            f'Activities | {player["character"]}': 0 for player in players.values()
+        }
+        for activity in activities:
+            character = activity["player"]["character"]
+            activities_by_players[f"Activities | {character}"] += 1
+
         game_stats = get_data("game", game_code=game_code)["stats"]
         game_stats = {
             "Draw Pile": len(draw_pile),
             "Discard Pile": len(discards),
             **game_stats,
+            **activities_by_players,
         }
         for (stat, value), metric_column in zip(
             game_stats.items(), metric_columns_1 + metric_columns_2
