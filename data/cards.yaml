@@ -201,6 +201,7 @@
   name: The Ring
   image: The Ring
   battle_point: 1
+  is_discardable: False
 
 - id: 57
   name: Treebeard

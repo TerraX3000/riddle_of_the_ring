@@ -270,14 +270,17 @@ def remove_card_from_hand(card_id, player_code=None):
 
 def add_card_to_discard(card_id):
     card = get_card(card_id)
-    game_code = st.query_params.game
-    unselect_card(card_id, for_all_players=True)
-    discards = get_data("discards", game_code=game_code)
-    discards.append(card_id)
-    set_data("discards", discards, game_code=game_code)
-    remove_card_from_hand(card_id)
-    remove_table_card(card_id)
-    add_activity(f"Discard ({card['name']})")
+    is_discardable = card.get("is_discardable", True)
+    if is_discardable:
+        game_code = st.query_params.game
+        unselect_card(card_id, for_all_players=True)
+        discards = get_data("discards", game_code=game_code)
+        if card_id not in discards:
+            discards.append(card_id)
+            set_data("discards", discards, game_code=game_code)
+            remove_card_from_hand(card_id)
+            remove_table_card(card_id)
+            add_activity(f"Discard ({card['name']})")
 
 
 def keep_card(card_id):
