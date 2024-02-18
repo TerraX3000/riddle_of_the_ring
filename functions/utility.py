@@ -103,6 +103,15 @@ def get_card(card_id):
     return None
 
 
+def get_player(character):
+    game_code = st.query_params.game
+    players = get_data("players", game_code=game_code)
+    for player in players.values():
+        if player["character"] == character:
+            return player
+    return None
+
+
 def get_shuffled_deck():
     cards = get_cards()
     cards = [
@@ -247,9 +256,13 @@ def update_players(players):
     set_data("players", players, game_code=game_code)
 
 
-def add_card_to_hand(card_id):
+def add_card_to_hand(card_id, character=None):
     game_code = st.query_params.game
-    player_code = st.query_params.player
+    if character:
+        player = get_player(character)
+        player_code = player["player_code"]
+    else:
+        player_code = st.query_params.player
     players = get_data("players", game_code=game_code)
     if card_id not in players[player_code]["cards"]:
         players[player_code]["cards"].append(card_id)
@@ -334,10 +347,10 @@ def add_city_battle_card(battle_role, side):
     use_card_for_battle(card_id, battle_role)
 
 
-def transfer_card(card_id):
+def transfer_card(card_id, character=None):
     card_owner = get_card_owner(card_id)
     remove_card_from_hand(card_id, card_owner["player_code"])
-    add_card_to_hand(card_id)
+    add_card_to_hand(card_id, character=character)
     unselect_card(card_id)
     return
 
@@ -378,6 +391,15 @@ def show_card_to_character(card_id):
     show_card_to_player = {"show_card_to_character": character, "show_card": card_id}
     set_data("show_card_to_player", show_card_to_player, game_code=game_code)
     action = "Show Card to Player"
+    add_activity(f"{action} ({character})")
+    return
+
+
+def give_card_to_character(card_id):
+    character = st.session_state["give_card_to_character"]
+    st.session_state.pop("give_card_to_character")
+    transfer_card(card_id, character=character)
+    action = "Give Card to Player"
     add_activity(f"{action} ({character})")
     return
 
@@ -463,15 +485,18 @@ def set_action(action, card_id):
     elif action == "Discard":
         add_card_to_discard(card_id)
         return
-    elif action == "Take for Friendly Exchange":
+    elif action == "Take Card from Player":
         card_owner = get_card_owner(card_id)
         transfer_card(card_id)
         add_activity(f"{action} (from {card_owner['character']})")
         return
-    elif action == "Place on table":
+    elif action == "Place on Table":
         place_card_on_table(card_id)
     elif action == "Show Card to Player":
         st.session_state["show_card_to_character"] = True
+        return
+    elif action == "Give Card to Player":
+        st.session_state["give_card_to_character"] = True
         return
     add_activity(f"{action} ({card['name']})")
     return

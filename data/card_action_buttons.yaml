@@ -15,7 +15,7 @@
   is_not_current_turn_only: True
   is_card_owner_only: True
   is_battle_card_only: True
-- name: Place on table
+- name: Place on Table
   is_card_owner_only: True
 - name: Use Spy
   is_current_turn_only: True
@@ -25,5 +25,7 @@
   is_card_owner_only: True
 - name: Show Card to Player
   is_card_owner_only: True
-- name: Take for Friendly Exchange
+- name: Take Card from Player
   is_not_card_owner_only: True
+- name: Give Card to Player
+  is_card_owner_only: True

@@ -6,6 +6,7 @@ from functions.utility import (
     get_card,
     set_action,
     show_card_to_character,
+    give_card_to_character,
 )
 import random
 import string
@@ -114,5 +115,20 @@ def run():
                 key="show_card_to_character",
                 options=options,
                 on_change=show_card_to_character,
+                kwargs={"card_id": card_id},
+            )
+        if "give_card_to_character" in st.session_state:
+            st.session_state.pop("give_card_to_character")
+            options = [
+                player["character"]
+                for player in players.values()
+                if player["player_code"] != player_code
+            ]
+            st.selectbox(
+                "Select Character to Give Card",
+                index=None,
+                key="give_card_to_character",
+                options=options,
+                on_change=give_card_to_character,
                 kwargs={"card_id": card_id},
             )
