@@ -6,5 +6,6 @@ modules:
   - resume_game
   - exit_game
   - admin
+  - map
   
 
