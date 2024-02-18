@@ -85,9 +85,6 @@ def run():
                 if button_enabled and is_card_owner_only:
                     button_enabled = is_card_owner
                 if button_enabled and is_not_card_owner_only:
-                    ic(button["name"])
-                    ic(is_not_card_owner_only)
-                    ic(is_card_owner)
                     button_enabled = not is_card_owner
                 if button_enabled and is_not_current_turn_only:
                     button_enabled = not is_current_turn
