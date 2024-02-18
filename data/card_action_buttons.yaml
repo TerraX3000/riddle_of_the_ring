@@ -10,9 +10,11 @@
 - name: Use to Attack
   is_current_turn_only: True
   is_card_owner_only: True
+  is_battle_card_only: True
 - name: Use to Defend
   is_not_current_turn_only: True
   is_card_owner_only: True
+  is_battle_card_only: True
 - name: Place on table
   is_card_owner_only: True
 - name: Use Spy

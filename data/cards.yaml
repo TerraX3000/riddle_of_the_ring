@@ -64,146 +64,193 @@
 - id: 22
   name: Eagles
   image: Eagles 1
+  battle_point: 1
 - id: 23
   name: Eagles
   image: Eagles 2
+  battle_point: 1
 - id: 24
   name: Flying Beasts
   image: Flying Beasts 1
+  battle_point: 1
 - id: 25
   name: Flying Beasts
   image: Flying Beasts 2
+  battle_point: 1
 - id: 26
   name: Good Army
   image: Good Army 1
+  battle_point: 1
 - id: 27
   name: Good Army
   image: Good Army 2
+  battle_point: 1
 - id: 28
   name: Good Army
   image: Good Army 3
+  battle_point: 1
 - id: 29
   name: Good Army
   image: Good Army 4
+  battle_point: 1
 - id: 30
   name: Good Army
   image: Good Army 5
+  battle_point: 1
 - id: 31
   name: Good Army
   image: Good Army 6
+  battle_point: 1
 - id: 32
   name: Good Army
   image: Good Army 7
+  battle_point: 1
 - id: 33
   name: Evil Army
   image: Evil Army 1
+  battle_point: 1
 - id: 34
   name: Evil Army
   image: Evil Army 2
+  battle_point: 1
 - id: 35
   name: Evil Army
   image: Evil Army 3
+  battle_point: 1
 - id: 36
   name: Evil Army
   image: Evil Army 4
+  battle_point: 1
 - id: 37
   name: Evil Army
   image: Evil Army 5
+  battle_point: 1
 - id: 38
   name: Evil Army
   image: Evil Army 6
+  battle_point: 1
 - id: 39
   name: Evil Army
   image: Evil Army 7
+  battle_point: 1
 - id: 40
   name: Neutral Army
   image: Neutral Army 1
+  battle_point: 1
 - id: 41
   name: Neutral Army
   image: Neutral Army 2
+  battle_point: 1
 - id: 42
   name: Neutral Army
   image: Neutral Army 3
+  battle_point: 1
 - id: 43
   name: Neutral Army
   image: Neutral Army 4
+  battle_point: 1
 - id: 44
   name: Frodo
   image: Frodo
+  battle_point: 1
 - id: 45
   name: Sam
   image: Sam
+  battle_point: 1
 - id: 46
   name: Merry
   image: Merry
+  battle_point: 1
 - id: 47
   name: Pippin
   image: Pippin
+  battle_point: 1
 - id: 48
   name: Black Rider 1
   image: Black Rider 1
+  battle_point: 1
 - id: 49
   name: Black Rider 2
   image: Black Rider 2
+  battle_point: 1
 - id: 50
   name: Black Rider 3
   image: Black Rider 3
+  battle_point: 1
 - id: 51
   name: Black Rider 4
   image: Black Rider 4
+  battle_point: 1
 - id: 52
   name: Gandalf
   image: Gandalf
+  battle_point: 1
 - id: 53
   name: Galadriel
   image: Galadriel
+  battle_point: 1
 - id: 54
   name: Sauron
   image: Sauron
+  battle_point: 1
 - id: 55
   name: The Balrog
   image: The Balrog
+  battle_point: 1
 - id: 56
   name: The Ring
   image: The Ring
+  battle_point: 1
 
 - id: 57
   name: Treebeard
   image: Treebeard
+  battle_point: 1
 - id: 58
   name: Strider
   image: Strider
+  battle_point: 1
 - id: 59
   name: Boromir
   image: Boromir
+  battle_point: 1
 - id: 60
   name: Legolas
   image: Legolas
+  battle_point: 1
 - id: 61
   name: Gimli
   image: Gimli
+  battle_point: 1
 - id: 62
   name: Butterbur
   image: Butterbur
+  battle_point: 1
 
 - id: 63
   name: Saruman
   image: Saruman
+  battle_point: 1
 - id: 64
   name: Mouth of Sauron
   image: Mouth of Sauron
+  battle_point: 1
 - id: 65
   name: Wormtongue
   image: Wormtongue
+  battle_point: 1
 - id: 66
   name: Grishnakh
   image: Grishnakh
+  battle_point: 1
 - id: 67
   name: Ugluk
   image: Ugluk
+  battle_point: 1
 - id: 68
   name: Bill Ferny
   image: Bill Ferny
+  battle_point: 1
 
 - id: 69
   name: Gollum

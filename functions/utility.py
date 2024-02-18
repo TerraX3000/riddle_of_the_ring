@@ -289,7 +289,8 @@ def keep_card(card_id):
 def use_card_for_battle(card_id, battle_role):
     game_code = st.query_params.game
     battle = get_data("battle", game_code=game_code)
-    battle[f"{battle_role}_cards"].append(card_id)
+    if card_id not in battle[f"{battle_role}_cards"]:
+        battle[f"{battle_role}_cards"].append(card_id)
     set_data("battle", battle, game_code=game_code)
     return
 

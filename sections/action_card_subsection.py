@@ -51,9 +51,10 @@ def run():
     for card_id, card_column in zip(selected_cards, card_columns):
         my_cards = players[player_code]["cards"]
         with card_column:
+            card = get_card(card_id)
+            is_battle_point = card.get("battle_point")
             if card_id in my_cards:
                 is_card_owner = True
-                card = get_card(card_id)
                 card_image = card["image"]
                 card_name = card["name"]
             else:
@@ -61,7 +62,7 @@ def run():
                 card_owner = get_card_owner(card_id)
                 card_image = "Reverse"
                 card_name = f"<{card_owner['character']} Card>"
-            card = get_card(card_id)
+
             st.image(
                 f"static/card_images/{card_image}.png",
                 caption=card_name,
@@ -77,6 +78,7 @@ def run():
                 is_card_owner_only = button.get("is_card_owner_only")
                 is_not_card_only_owner = button.get("is_not_card_only_owner")
                 is_not_current_turn_only = button.get("is_not_current_turn_only")
+                is_battle_card_only = button.get("is_battle_card_only")
                 if button_enabled and is_current_turn_only:
                     button_enabled = is_current_turn
                 if button_enabled and is_card_owner_only:
@@ -85,6 +87,8 @@ def run():
                     button_enabled = not is_card_owner
                 if button_enabled and is_not_current_turn_only:
                     button_enabled = not is_current_turn
+                if button_enabled and is_battle_card_only:
+                    button_enabled = is_battle_point
                 rid = "".join(
                     random.choices(string.ascii_uppercase + string.digits, k=6)
                 )
