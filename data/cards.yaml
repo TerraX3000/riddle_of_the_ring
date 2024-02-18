@@ -210,7 +210,7 @@
 - id: 58
   name: Strider
   image: Strider
-  battle_point: 1
+  battle_point: 2
 - id: 59
   name: Boromir
   image: Boromir
@@ -235,7 +235,7 @@
 - id: 64
   name: Mouth of Sauron
   image: Mouth of Sauron
-  battle_point: 1
+  battle_point: 2
 - id: 65
   name: Wormtongue
   image: Wormtongue
