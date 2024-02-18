@@ -439,6 +439,15 @@ def add_game_stat(key, value):
     game = get_data("game", game_code=game_code)
     game["stats"][key] = value
     set_data("game", game, game_code=game_code)
+    return
+
+
+def add_game_metric(name, key, type="incrementer"):
+    game_code = st.query_params.game
+    game = get_data("game", game_code=game_code)
+    game["metrics"][name][str(key)] += 1
+    set_data("game", game, game_code=game_code)
+    return
 
 
 def set_action(action, card_id):
@@ -488,6 +497,7 @@ def set_general_action(action=None):
     elif action == "Roll Die":
         roll = random.randint(1, 6)
         add_game_stat("Last Roll", roll)
+        add_game_metric("Rolls", roll)
         action += f": {roll}"
     elif action == "End Turn":
         set_next_turn()

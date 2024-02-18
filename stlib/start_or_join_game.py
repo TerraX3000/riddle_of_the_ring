@@ -57,7 +57,8 @@ def initialize_game(game_code, player_code, character):
             game_code=game_code,
         )
 
-        game = {"is_started": False, "stats": {}}
+        metrics = {"Rolls": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}}
+        game = {"is_started": False, "stats": {}, "metrics": metrics}
         initialize_game_data(category="game", data=game, game_code=game_code)
 
         print("+++++ Session initialization complete +++++++")
