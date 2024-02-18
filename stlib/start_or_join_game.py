@@ -1,6 +1,7 @@
 import streamlit as st
 from sections import navbar
 from functions.utility import (
+    read_yaml,
     get_data,
     set_data,
     initialize_game_data,
@@ -42,7 +43,10 @@ def initialize_game(game_code, player_code, character):
         }
         players[player_code] = player
         initialize_game_data(category="players", game_code=game_code, data=players)
-        initialize_game_data(category="activities", game_code=game_code, data=[])
+        game_chat_messages = read_yaml("data/game_chat.yaml")
+        initialize_game_data(
+            category="activities", game_code=game_code, data=game_chat_messages
+        )
         initialize_game_data(
             category="draw_pile", game_code=game_code, data=get_shuffled_deck()
         )

@@ -1,7 +1,10 @@
 import streamlit as st
-from functions.utility import get_data, add_activity, let_it_rain, get_emojis
+from functions.utility import get_data, add_activity, let_it_rain, get_emojis, read_yaml
 import time
 from icecream import ic
+import random
+
+assistant_replies = read_yaml("data/assistant_replies.yaml")
 
 
 def stream_data(response):
@@ -40,7 +43,6 @@ def get_game_stats():
         response += f"""For the Black Riders, we have:\n\n {' '.join(black_riders)}"""
     else:
         response += f"""There are no Black Riders playing."""
-
     add_activity(response, type="assistant")
 
 
@@ -54,15 +56,22 @@ def update_chat_messages(message_container):
         is_last = index == len(activities)
         type = activity.get("type")
         action = activity["action"]
-        character = activity["player"]["character"]
+        try:
+            character = activity["player"]["character"]
+        except:
+            character = ""
 
         activity_markdown = f"""{character}: {action}"""
         if type == "user":
             message_container.chat_message("user").write(f"{activity_markdown}")
         elif type == "assistant":
-            message_container.chat_message("assistant").write(action)
+            message_container.chat_message("assistant", avatar="🦁").write(
+                f"""{action}""", unsafe_allow_html=True
+            )
         elif type == "rain spell" and is_last:
-            message_container.chat_message("assistant").write("LET IT RAIN!")
+            message_container.chat_message("assistant", avatar="🦁").write(
+                "LET IT RAIN!"
+            )
             let_it_rain(key=action)
 
 
@@ -81,8 +90,8 @@ def run(col):
             cleaned_prompt = prompt.replace("ai", "").strip()
             add_activity(cleaned_prompt, type="assistant")
             get_ai_response()
-        elif prompt.lower().startswith("let it rain"):
-            rain_object = prompt.lower().replace("let it rain", "").strip()
+        elif prompt.lower().startswith("rex, let it rain"):
+            rain_object = prompt.lower().replace("rex, let it rain", "").strip()
             emojis = get_emojis().keys()
             if rain_object in emojis:
                 add_activity(prompt, type="user")
@@ -98,6 +107,8 @@ def run(col):
                 add_activity(
                     "That spell isn't quite right, let it rain WHAT?", type="assistant"
                 )
+        elif prompt.lower().startswith("rex"):
+            add_activity(random.choice(assistant_replies), type="assistant")
         elif prompt.lower() != "m":
             add_activity(prompt, type="user")
     update_chat_messages(messages)

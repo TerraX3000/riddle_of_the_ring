@@ -1,0 +1,22 @@
+- type: assistant
+  action: "Welcome to Riddle of the Ring! I'm your guide, Rex the Lion.
+  <br><br>
+  Use your Game Code to invite fellow players to join you on the quest -- or oppose you!
+  <br><br>
+  Once everyone has joined, click Start Game (under General Actions).
+  <br><br>
+  Each player will receive two cards to begin with.
+  <br><br>
+  One player will be selected to start and play will proceed in the order shown in the players area."
+- type: assistant
+  action: "Use the General Actions to roll the die and click the game board to move your marker.
+  <br><br>
+  Select cards from your hand to perform special actions.
+  <br><br>
+  After you complete your turn, click End Turn (under General Actions)."
+- type: assistant
+  action: "Use the chat input area to share messages with other players.
+  <br><br>
+  You can also ask me to cast magic spells, though I'm still learning.
+  <br><br>
+  Just ask me by saying \"Rex, ...\" or just call me for some deep thoughts."
