@@ -415,6 +415,7 @@ def riddle_player(card_id):
         "riddle_card": card_id,
         "card_owner": character,
         "riddler": this_character,
+        "can_riddler_see_card": False,
     }
     set_data("riddle_power_play", riddle_power_play, game_code=game_code)
     action = "Riddle Player"
