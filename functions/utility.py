@@ -423,6 +423,44 @@ def riddle_player(card_id):
     return
 
 
+def use_card_in_friendly_exchange(card_id):
+    game_code = st.query_params.game
+    player_code = st.query_params.player
+    players = get_data("players", game_code=game_code)
+    this_character = players[player_code]["character"]
+    card_owner = get_card_owner(card_id)
+    character = card_owner["character"]
+    friendly_exchange = get_data("friendly_exchange", game_code=game_code)
+    if friendly_exchange:
+        first_party = friendly_exchange["first_party"]
+        second_party = friendly_exchange["second_party"]
+        is_first_party = character == first_party
+        is_second_party = this_character == second_party
+        if not is_first_party:
+            st.error(f"Pick a card belonging to {first_party}")
+        if not is_second_party:
+            st.error(
+                f"Only {first_party} and {second_party} can participate in this friendly exchange"
+            )
+        if is_second_party:
+            friendly_exchange[this_character] = {
+                "character": character,
+                "card": card_id,
+            }
+            friendly_exchange["status"] = "ready"
+    else:
+        friendly_exchange = {
+            this_character: {"character": character, "card": card_id},
+            "status": "pending",
+            "first_party": this_character,
+            "second_party": character,
+        }
+    set_data("friendly_exchange", friendly_exchange, game_code=game_code)
+    action = "Friendly Exchange"
+    add_activity(f"{action} ({character})")
+    return
+
+
 @st.cache_data
 def get_emojis():
     emojis = {"cats": "🐈", "dogs": "🌭", "balloons": "🎈"}
@@ -509,6 +547,9 @@ def set_action(action, card_id):
         return
     elif action == "Place on Table":
         place_card_on_table(card_id)
+    elif action == "Take Card in Friendly Exchange":
+        use_card_in_friendly_exchange(card_id)
+        return
     elif action == "Riddle Player":
         riddle_player(card_id)
         return

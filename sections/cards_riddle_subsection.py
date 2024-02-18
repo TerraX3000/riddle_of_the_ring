@@ -100,4 +100,3 @@ def run():
                     f"static/card_images/{card_image}.png",
                     caption=f"{card_name}",
                 )
-                # set_data("riddle_power_play", data=None, game_code=game_code)

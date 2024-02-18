@@ -17,12 +17,11 @@
   is_battle_card_only: True
 - name: Place on Table
   is_card_owner_only: True
-- name: Use Spy
-  is_current_turn_only: True
-  is_card_owner_only: True
 - name: Riddle Player
   is_current_turn_only: True
   is_not_card_owner_only: False
+- name: Take Card in Friendly Exchange
+  is_not_card_owner_only: True
 - name: Show Card to Player
   is_card_owner_only: True
 - name: Take Card from Player

@@ -62,6 +62,12 @@ def initialize_game(game_code, player_code, character):
         )
 
         initialize_game_data(
+            category="friendly_exchange",
+            data={},
+            game_code=game_code,
+        )
+
+        initialize_game_data(
             category="show_card_to_player",
             data={},
             game_code=game_code,
