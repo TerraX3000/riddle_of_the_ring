@@ -1,4 +1,5 @@
 import streamlit as st
+from streamlit_autorefresh import st_autorefresh
 from sections import (
     game_chat_section,
     navbar,
@@ -27,6 +28,10 @@ def run():
     game_code = query_params.get("game")
     player_code = query_params.get("player")
     navbar.run()
+    auto_refresh = st.toggle("Auto Refresh", value=True)
+    if auto_refresh:
+        st_autorefresh(interval=10000, limit=None, key="riddle")
+
     if not game_code or not player_code:
         st.error(
             "Game Code and Player Code are required to play.  Please start a new game or join an existing game."
