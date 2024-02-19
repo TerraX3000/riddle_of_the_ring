@@ -533,6 +533,7 @@ def set_action(action, card_id):
     # st.session_state[f"action_{card_id}"] = None
     if action == "Unselect":
         unselect_card(card_id)
+        return
     elif action == "Use to Defend":
         use_card_for_battle(card_id, "defender")
     elif action == "Use to Attack":
