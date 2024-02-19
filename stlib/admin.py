@@ -42,3 +42,5 @@ def run():
         st.write(get_data("draw_pile", game_code=game_code))
         st.write("Discards")
         st.write(get_data("discards", game_code=game_code))
+        st.write("Assistant Replies")
+        st.write(get_data("assistant_replies_index", game_code=game_code))

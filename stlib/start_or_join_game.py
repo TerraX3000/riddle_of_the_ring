@@ -10,6 +10,7 @@ from functions.utility import (
 from icecream import ic
 import coolname
 from typing import List
+import random
 
 
 @st.cache_data(ttl=600)
@@ -70,6 +71,15 @@ def initialize_game(game_code, player_code, character, player_name):
         initialize_game_data(
             category="show_card_to_player",
             data={},
+            game_code=game_code,
+        )
+
+        assistant_replies = read_yaml("data/assistant_replies.yaml")
+        assistant_replies_index = list(range(0, len(assistant_replies)))
+        random.shuffle(assistant_replies_index)
+        initialize_game_data(
+            category="assistant_replies_index",
+            data=assistant_replies_index,
             game_code=game_code,
         )
 

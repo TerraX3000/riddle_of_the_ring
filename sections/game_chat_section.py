@@ -1,10 +1,27 @@
 import streamlit as st
-from functions.utility import get_data, add_activity, let_it_rain, get_emojis, read_yaml
+from functions.utility import (
+    get_data,
+    set_data,
+    add_activity,
+    let_it_rain,
+    get_emojis,
+    read_yaml,
+)
 import time
 from icecream import ic
-import random
+from typing import List
 
-assistant_replies = read_yaml("data/assistant_replies.yaml")
+
+def get_random_assistant_reply():
+    game_code = st.query_params.game
+    assistant_replies = read_yaml("data/assistant_replies.yaml")
+    assistant_replies_index: List = get_data(
+        "assistant_replies_index", game_code=game_code
+    )
+    selected_index = assistant_replies_index.pop()
+    set_data("assistant_replies_index", assistant_replies_index, game_code=game_code)
+    reply = assistant_replies[selected_index]
+    return reply
 
 
 def stream_data(response):
@@ -108,7 +125,8 @@ def run(col):
                     "That spell isn't quite right, let it rain WHAT?", type="assistant"
                 )
         elif prompt.lower().startswith("rex"):
-            add_activity(random.choice(assistant_replies), type="assistant")
+            reply = get_random_assistant_reply()
+            add_activity(reply, type="assistant")
         elif prompt.lower() != "m":
             add_activity(prompt, type="user")
     update_chat_messages(messages)

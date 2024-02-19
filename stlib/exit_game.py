@@ -26,6 +26,7 @@ def run():
             "show_card_to_player",
             "friendly_exchange",
             "riddle_power_play",
+            "assistant_replies_index",
         ]
         for key in keys:
             redis_functions.delete_data(key, game_code=game_code)
