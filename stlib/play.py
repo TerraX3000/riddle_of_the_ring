@@ -28,9 +28,15 @@ def run():
     game_code = query_params.get("game")
     player_code = query_params.get("player")
     navbar.run()
-    auto_refresh = st.toggle("Auto Refresh", value=True)
+
+    if "is_auto_refresh" not in st.session_state:
+        st.session_state["is_auto_refresh"] = True
+    auto_refresh = st.toggle("Auto Refresh", value=st.session_state["is_auto_refresh"])
+    auto_refresh_interval = 10_000
     if auto_refresh:
-        st_autorefresh(interval=10000, limit=None, key="riddle")
+        count = st_autorefresh(interval=auto_refresh_interval, limit=None, key="riddle")
+        if count > (30 * 60 * 1000) / auto_refresh_interval:
+            st.session_state["is_auto_refresh"] = False
 
     if not game_code or not player_code:
         st.error(
