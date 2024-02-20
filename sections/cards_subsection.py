@@ -7,6 +7,7 @@ from functions.utility import (
     is_card_selected_or_in_use,
     set_data,
     shuffle_player_cards,
+    check_time_exceeded,
 )
 from collections import OrderedDict
 from icecream import ic
@@ -34,7 +35,10 @@ def run():
             == players[player_code]["character"]
         ):
             is_show_hand_to_character = True
-            player["special_actions"]["show_hand_to_character"] = None
+            viewing_time = 60_000
+            is_time_exceeded = check_time_exceeded(viewing_time)
+            if is_time_exceeded:
+                player["special_actions"]["show_hand_to_character"] = None
 
         with player_tab:
             player_cards = player["cards"]

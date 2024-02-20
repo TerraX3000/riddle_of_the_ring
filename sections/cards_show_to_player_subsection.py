@@ -4,6 +4,7 @@ from functions.utility import (
     set_data,
     get_card,
     get_card_owner,
+    check_time_exceeded,
 )
 from icecream import ic
 
@@ -34,4 +35,9 @@ def run():
                     f"static/card_images/{card['image']}.png",
                     caption=f"{card['name']} ({card_owner['character']})",
                 )
-                set_data("show_card_to_player", data=None, game_code=game_code)
+
+                viewing_time = 30_000
+                is_time_exceeded = check_time_exceeded(viewing_time)
+
+                if is_time_exceeded:
+                    set_data("show_card_to_player", data=None, game_code=game_code)

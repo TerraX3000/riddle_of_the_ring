@@ -42,6 +42,22 @@ def validate_game_data():
     return
 
 
+def check_time_exceeded(viewing_time):
+    is_time_exceeded = False
+    if st.session_state["is_auto_refresh"]:
+        auto_refresh_interval = st.session_state["auto_refresh_interval"]
+        max_view_counter = viewing_time / auto_refresh_interval
+        if "view_counter" not in st.session_state:
+            st.session_state["view_counter"] = 0
+        st.session_state["view_counter"] += 1
+        if st.session_state["view_counter"] >= max_view_counter:
+            is_time_exceeded = True
+            del st.session_state["view_counter"]
+    else:
+        is_time_exceeded = True
+    return is_time_exceeded
+
+
 def get_data(category: str, game_code=None):
     data = redis_functions.get_data(category, game_code=game_code)
     # print("get_data", category, data)
