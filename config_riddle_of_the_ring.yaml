@@ -7,5 +7,6 @@ modules:
   - exit_game
   - admin
   - map
+  - automation
   
 

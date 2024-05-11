@@ -1,0 +1,7 @@
+default: 
+  js_scripts:
+    -  https://cdn.datatables.net/v/dt/jq-3.7.0/jszip-3.10.1/dt-2.0.7/b-3.0.2/b-html5-3.0.2/r-3.0.2/datatables.min.js
+  stylesheets:
+    - https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css
+    - https://cdn.datatables.net/v/dt/jq-3.7.0/jszip-3.10.1/dt-2.0.7/b-3.0.2/b-html5-3.0.2/r-3.0.2/datatables.min.css
+  class_name: compact row-border hover nowrap
