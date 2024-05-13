@@ -7,8 +7,8 @@ import datetime
 LOG_PATH = "automation_log.json"
 
 
-def get_automation_log():
-    if not os.path.exists(LOG_PATH):
+def get_automation_log(is_reset_log=False):
+    if not os.path.exists(LOG_PATH) or is_reset_log:
         automation_log = []
         with open(LOG_PATH, "w") as f:
             json.dump(automation_log, f)
@@ -34,5 +34,8 @@ def run():
     if log_entry:
         add_log_entry(log_entry)
     else:
+        reset_log = st.button("Reset log")
+        if reset_log:
+            get_automation_log(is_reset_log=True)
         automation_log = get_automation_log()
         st.write(automation_log)
