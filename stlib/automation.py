@@ -13,12 +13,13 @@ def clear_schedule():
 
 def add_progam(command, program, schedule, automation_schedule):
     if command and program and schedule:
+        uid = str(uuid.uuid4())
         automation_program = {}
         automation_program["uid"] = str(uuid.uuid4())
         automation_program["command"] = command
         automation_program["name"] = program
         automation_program["schedule"] = schedule
-        automation_schedule.append(automation_program)
+        automation_schedule[uid] = automation_program
         with open(schedule_path, "w") as f:
             json.dump(automation_schedule, f)
 
@@ -26,7 +27,7 @@ def add_progam(command, program, schedule, automation_schedule):
 def run():
     st.write("Automation Scheduler")
     if not os.path.exists(schedule_path):
-        automation_schedule = []
+        automation_schedule = {}
         with open(schedule_path, "w") as f:
             json.dump(automation_schedule, f)
 
@@ -35,7 +36,7 @@ def run():
 
     st.button("Clear Schedule", on_click=clear_schedule)
 
-    st.data_editor(automation_schedule, use_container_width=True)
+    st.data_editor(list(automation_schedule.values()), use_container_width=True)
 
     col_1, col_2, col_3, col_4 = st.columns([1, 1, 1, 1])
     with col_1:
