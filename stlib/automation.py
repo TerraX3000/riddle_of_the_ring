@@ -11,17 +11,19 @@ def clear_schedule():
         json.dump({}, f)
 
 
-def add_progam(command, program, schedule, automation_schedule):
-    if command and program and schedule:
-        uid = str(uuid.uuid4())
-        automation_program = {}
-        automation_program["uid"] = uid
-        automation_program["command"] = command
-        automation_program["name"] = program
-        automation_program["schedule"] = schedule
-        automation_schedule[uid] = automation_program
-        with open(schedule_path, "w") as f:
-            json.dump(automation_schedule, f)
+def add_progam():
+    automation_schedule = st.session_state.automation_schedule
+    schedule = f"{st.session_state.minute} {st.session_state.hour} {st.session_state.day_of_month} {st.session_state.month} {st.session_state.day_of_week}"
+    print(schedule)
+    uid = str(uuid.uuid4())
+    automation_program = {}
+    automation_program["uid"] = uid
+    automation_program["command"] = st.session_state.command
+    automation_program["name"] = st.session_state.program
+    automation_program["schedule"] = schedule
+    automation_schedule[uid] = automation_program
+    with open(schedule_path, "w") as f:
+        json.dump(automation_schedule, f)
 
 
 def run():
@@ -35,21 +37,38 @@ def run():
         automation_schedule = json.load(f)
 
     st.button("Clear Schedule", on_click=clear_schedule)
-
+    st.session_state.automation_schedule = automation_schedule
     st.data_editor(list(automation_schedule.values()), use_container_width=True)
+    with st.form(key="add_program_form", clear_on_submit=True):
+        col_1, col_2 = st.columns(
+            [
+                1,
+                1,
+            ]
+        )
+        col_3, col_4, col_5, col_6, col_7 = st.columns([1, 1, 1, 1, 1])
+        with col_1:
+            options = ["automation_script"]
+            st.selectbox("Type", options=options, disabled=True, key="command")
+        with col_2:
+            options = [
+                "Program 1",
+                "Program 2",
+                "Program 3",
+                "Program 4",
+                "Program 5",
+                "Power Off",
+            ]
+            st.selectbox("Program Name", options=options, index=None, key="program")
+        with col_3:
+            st.text_input("Minute", value="*", key="minute")
+        with col_4:
+            st.text_input("Hour", value="*", key="hour")
+        with col_5:
+            st.text_input("Day of Month", value="*", key="day_of_month")
+        with col_6:
+            st.text_input("Month", value="*", key="month")
+        with col_7:
+            st.text_input("Day of Week", value="*", key="day_of_week")
 
-    col_1, col_2, col_3, col_4 = st.columns([1, 1, 1, 1])
-    with col_1:
-        options = ["automation_script"]
-        command = st.selectbox("Type", options=options)
-    with col_2:
-        options = ["Program 1", "Program 2", "Program 3", "Program 4", "Program 5"]
-        program = st.selectbox("Program Name", options=options)
-    with col_3:
-        schedule = st.text_input("Schedule", placeholder="* 15 * * *")
-
-    st.button(
-        "Add Program",
-        on_click=add_progam,
-        args=[command, program, schedule, automation_schedule],
-    )
+        st.form_submit_button("Add Program", on_click=add_progam)
