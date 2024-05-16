@@ -8,14 +8,14 @@ schedule_path = "static/automation_schedule.json"
 
 def clear_schedule():
     with open(schedule_path, "w") as f:
-        json.dump([], f)
+        json.dump({}, f)
 
 
 def add_progam(command, program, schedule, automation_schedule):
     if command and program and schedule:
         uid = str(uuid.uuid4())
         automation_program = {}
-        automation_program["uid"] = str(uuid.uuid4())
+        automation_program["uid"] = uid
         automation_program["command"] = command
         automation_program["name"] = program
         automation_program["schedule"] = schedule
