@@ -61,14 +61,14 @@ def run():
             ]
             st.selectbox("Program Name", options=options, index=None, key="program")
         with col_3:
-            st.text_input("Minute", value="*", key="minute")
+            st.text_input("Minute (0-59)", value="*", key="minute")
         with col_4:
-            st.text_input("Hour", value="*", key="hour")
+            st.text_input("Hour (0-23)", value="*", key="hour")
         with col_5:
-            st.text_input("Day of Month", value="*", key="day_of_month")
+            st.text_input("Day of Month (1-31)", value="*", key="day_of_month")
         with col_6:
-            st.text_input("Month", value="*", key="month")
+            st.text_input("Month (1-12)", value="*", key="month")
         with col_7:
-            st.text_input("Day of Week", value="*", key="day_of_week")
+            st.text_input("Day of Week (0-6)", value="*", key="day_of_week")
 
         st.form_submit_button("Add Program", on_click=add_progam)
