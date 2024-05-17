@@ -12,18 +12,21 @@ def clear_schedule():
 
 
 def add_progam():
-    automation_schedule = st.session_state.automation_schedule
-    schedule = f"{st.session_state.minute} {st.session_state.hour} {st.session_state.day_of_month} {st.session_state.month} {st.session_state.day_of_week}"
-    print(schedule)
-    uid = str(uuid.uuid4())
-    automation_program = {}
-    automation_program["uid"] = uid
-    automation_program["command"] = st.session_state.command
-    automation_program["name"] = st.session_state.program
-    automation_program["schedule"] = schedule
-    automation_schedule[uid] = automation_program
-    with open(schedule_path, "w") as f:
-        json.dump(automation_schedule, f)
+    if not st.session_state.program:
+        st.error("Program is required")
+    else:
+        automation_schedule = st.session_state.automation_schedule
+        schedule = f"{st.session_state.minute} {st.session_state.hour} {st.session_state.day_of_month} {st.session_state.month} {st.session_state.day_of_week}"
+        print(schedule)
+        uid = str(uuid.uuid4())
+        automation_program = {}
+        automation_program["uid"] = uid
+        automation_program["command"] = st.session_state.command
+        automation_program["name"] = st.session_state.program
+        automation_program["schedule"] = schedule
+        automation_schedule[uid] = automation_program
+        with open(schedule_path, "w") as f:
+            json.dump(automation_schedule, f)
 
 
 def run():
