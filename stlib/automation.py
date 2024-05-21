@@ -61,6 +61,9 @@ def run():
                 "Program 4",
                 "Program 5",
                 "Power Off",
+                "Volume Up",
+                "Volume Down",
+                "Volumn Mute",
             ]
             st.selectbox("Program Name", options=options, index=None, key="program")
         with col_3:
