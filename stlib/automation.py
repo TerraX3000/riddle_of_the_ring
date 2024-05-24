@@ -12,8 +12,8 @@ def clear_schedule():
 
 
 def add_progam():
-    if not st.session_state.program:
-        st.error("Program is required")
+    if not st.session_state.program and not st.session_state.sequence:
+        st.error("Program or sequence is required")
     else:
         automation_schedule = st.session_state.automation_schedule
         schedule = f"{st.session_state.minute} {st.session_state.hour} {st.session_state.day_of_month} {st.session_state.month} {st.session_state.day_of_week}"
@@ -22,7 +22,10 @@ def add_progam():
         automation_program = {}
         automation_program["uid"] = uid
         automation_program["command"] = st.session_state.command
-        automation_program["name"] = st.session_state.program
+        if st.session_state.program:
+            automation_program["name"] = st.session_state.program
+        if st.session_state.sequence:
+            automation_program["sequence"] = st.session_state.sequence
         automation_program["schedule"] = schedule
         automation_schedule[uid] = automation_program
         with open(schedule_path, "w") as f:
@@ -76,5 +79,9 @@ def run():
             st.text_input("Month (1-12)", value="*", key="month")
         with col_7:
             st.text_input("Day of Week (0-6)", value="*", key="day_of_week")
+        st.text_input(
+            "Sequence (Select Up Down Down Select Volume_Up Volume_Down Volume_Mute)",
+            key="sequence",
+        )
 
         st.form_submit_button("Add Program", on_click=add_progam)
