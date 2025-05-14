@@ -10,6 +10,17 @@ def clear_schedule():
     with open(schedule_path, "w") as f:
         json.dump({}, f)
 
+def add_alternative_progam(schedule,program):
+    automation_schedule = st.session_state.automation_schedule
+    uid = str(uuid.uuid4())
+    automation_program = {}
+    automation_program["uid"] = uid
+    automation_program["command"] = "automation_script"
+    automation_program["name"] = program
+    automation_program["schedule"] = schedule
+    automation_schedule[uid] = automation_program
+    with open(schedule_path, "w") as f:
+        json.dump(automation_schedule, f)
 
 def add_progam():
     if not st.session_state.program and not st.session_state.sequence:
@@ -17,7 +28,6 @@ def add_progam():
     else:
         automation_schedule = st.session_state.automation_schedule
         schedule = f"{st.session_state.minute} {st.session_state.hour} {st.session_state.day_of_month} {st.session_state.month} {st.session_state.day_of_week}"
-        print(schedule)
         uid = str(uuid.uuid4())
         automation_program = {}
         automation_program["uid"] = uid
@@ -31,20 +41,7 @@ def add_progam():
         with open(schedule_path, "w") as f:
             json.dump(automation_schedule, f)
 
-
-def run():
-    st.write("Automation Scheduler")
-    if not os.path.exists(schedule_path):
-        automation_schedule = {}
-        with open(schedule_path, "w") as f:
-            json.dump(automation_schedule, f)
-
-    with open(schedule_path) as f:
-        automation_schedule = json.load(f)
-
-    st.button("Clear Schedule", on_click=clear_schedule)
-    st.session_state.automation_schedule = automation_schedule
-    st.data_editor(list(automation_schedule.values()), use_container_width=True)
+def display_schedule_form():
     with st.form(key="add_program_form", clear_on_submit=True):
         col_1, col_2 = st.columns(
             [
@@ -85,3 +82,36 @@ def run():
         )
 
         st.form_submit_button("Add Program", on_click=add_progam)
+
+def process_alternative_schedule():
+    schedule = st.session_state.alternative_schedule
+    schedule = schedule.split("\n")
+    for s in schedule:
+        schedule_and_program = s.split(",")
+        schedule = schedule_and_program[0]
+        program = schedule_and_program[1]
+        add_alternative_progam(schedule,program)
+    
+
+
+def display_alternative_schedule_form():
+    st.text_area("Schedule", key="alternative_schedule")
+    with st.form(key="alternative_schedule_form", clear_on_submit=True):
+        st.form_submit_button("Add Program", on_click=process_alternative_schedule)
+
+
+def run():
+    st.write("Automation Scheduler")
+    if not os.path.exists(schedule_path):
+        automation_schedule = {}
+        with open(schedule_path, "w") as f:
+            json.dump(automation_schedule, f)
+
+    with open(schedule_path) as f:
+        automation_schedule = json.load(f)
+
+    st.button("Clear Schedule", on_click=clear_schedule)
+    st.session_state.automation_schedule = automation_schedule
+    st.data_editor(list(automation_schedule.values()), use_container_width=True)
+    display_schedule_form()
+    display_alternative_schedule_form()
