@@ -88,15 +88,15 @@ def process_alternative_schedule():
     schedule = schedule.split("\n")
     for s in schedule:
         schedule_and_program = s.split(",")
-        schedule = schedule_and_program[0]
-        program = schedule_and_program[1]
+        schedule = str(schedule_and_program[0]).strip()
+        program = str(schedule_and_program[1]).strip()
         add_alternative_progam(schedule,program)
     
 
 
 def display_alternative_schedule_form():
-    st.text_area("Schedule", key="alternative_schedule")
     with st.form(key="alternative_schedule_form", clear_on_submit=True):
+        st.text_area("Schedule", key="alternative_schedule")
         st.form_submit_button("Add Program", on_click=process_alternative_schedule)
 
 
