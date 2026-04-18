@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"name": "root",
+			"path": "."
+		},
+		{
+			"name": "riddle_streamlit",
+			"path": "packages/riddle_streamlit"
+		},
+		{
+			"name": "riddle_reflex",
+			"path": "packages/riddle_reflex"
+		}
+	],
+	"settings": {
+		"python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python"
+	}
+}
