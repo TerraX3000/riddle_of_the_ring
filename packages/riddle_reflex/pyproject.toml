@@ -1,7 +1,7 @@
 [project]
 name = "riddle-reflex"
 version = "0.1.0"
-description = "Add your description here"
+description = "Riddle of the Ring - A multiplayer board game set in Middle-earth"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
